@@ -1,0 +1,28 @@
+# Large dataset raw files (>100MB exceeds GitHub limit)
+dataset/raw/
+*.sqlite
+*.sqlite3
+
+# Visual Studio files
+.vs/
+*.user
+*.suo
+bin/
+obj/
+*.bak
+
+# Python & Notebook cache
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+
+# OS specific files
+Thumbs.db
+Desktop.ini
+.DS_Store
+# note
+sơ lược môn học.txt
+
+# style for ai generated readme
+style.md
+readme.md

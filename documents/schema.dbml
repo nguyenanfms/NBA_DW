@@ -1,0 +1,114 @@
+// ==============================================================================
+// NBA DATA WAREHOUSE (NBA_DW) — DBML SCHEMA FOR DBDATAM.IO
+// Mô hình Star Schema + Bảng cầu nối Player Game (Kimball Dimensional Model)
+// ==============================================================================
+
+Table dim_date {
+  date_key int [pk, note: "Định dạng YYYYMMDD"]
+  full_date date [not null]
+  year_number smallint [not null]
+  quarter_number tinyint [not null]
+  month_number tinyint [not null]
+  month_name varchar(15) [not null]
+  day_of_week_name varchar(15) [not null]
+  is_weekend boolean [not null]
+  Note: 'Chiều Thời gian lịch (Calendar Date Dimension)'
+}
+
+Table dim_season {
+  season_id int [pk, note: "Natural Key từ NBA (vd: 22022)"]
+  season_display varchar(15) [not null]
+  season_type varchar(30) [not null]
+  era_name varchar(50) [not null]
+  Note: 'Chiều Mùa giải & Kỷ nguyên (Season Dimension)'
+}
+
+Table dim_team {
+  team_id bigint [pk, note: "Natural Key từ NBA (vd: 1610612747)"]
+  full_name varchar(100) [not null]
+  abbreviation varchar(10) [not null]
+  city varchar(50) [not null]
+  state varchar(50) [not null]
+  conference varchar(30) [not null]
+  division varchar(30) [not null]
+  Note: 'Chiều Đội bóng (30 Franchise NBA)'
+}
+
+Table dim_arena {
+  arena_key int [pk, increment]
+  team_id bigint [note: "Khóa liên kết với Đội chủ quản"]
+  arena_name varchar(100) [not null]
+  arena_capacity int
+  city varchar(50)
+  owner varchar(100)
+  head_coach varchar(100)
+  Note: 'Chiều Sân vận động / Nhà thi đấu'
+}
+
+Table dim_player {
+  player_id int [pk, note: "Natural Key từ NBA"]
+  full_name varchar(100) [not null]
+  is_active boolean [not null]
+  position varchar(30)
+  height varchar(10)
+  weight float
+  country varchar(50)
+  birthdate date
+  draft_round_num int
+  draft_overall_pick int
+  from_year smallint
+  to_year smallint
+  Note: 'Chiều Cầu thủ (4,831 cầu thủ lịch sử NBA)'
+}
+
+Table fact_team_game {
+  fact_id bigint [pk, increment]
+  game_id varchar(30) [not null, note: "Degenerate Dimension"]
+  date_key int [not null]
+  season_id int [not null]
+  team_id bigint [not null]
+  opponent_id bigint [not null]
+  arena_key int
+  is_home tinyint [not null, note: "1 = Home, 0 = Away"]
+  is_win tinyint [not null, note: "1 = Win, 0 = Loss"]
+  pts float [not null]
+  pts_opponent float [not null]
+  plus_minus int [not null]
+  fgm float
+  fga float
+  fg3m float
+  fg3a float
+  reb float
+  ast float
+  tov float
+  pts_paint float
+  pts_fast_break float
+  game_count tinyint [not null, default: 1]
+  Note: 'Bảng Fact trung tâm: Hiệu suất 1 đội trong 1 trận đấu (131,284 dòng)'
+}
+
+Table player_game {
+  game_id varchar(30) [not null]
+  player_id int [not null]
+  team_id bigint [not null]
+  indexes {
+    (game_id, player_id) [pk]
+  }
+  Note: 'Bảng cầu nối: Cầu thủ ra sân trong trận đấu (617,110 dòng)'
+}
+
+// ==============================================================================
+// CÁC QUAN HỆ (RELATIONSHIPS)
+// ==============================================================================
+
+// Fact kết nối với các Dimension
+Ref: fact_team_game.date_key > dim_date.date_key
+Ref: fact_team_game.season_id > dim_season.season_id
+Ref: fact_team_game.team_id > dim_team.team_id
+Ref: fact_team_game.opponent_id > dim_team.team_id
+Ref: fact_team_game.arena_key > dim_arena.arena_key
+
+// Bridge Table kết nối Player, Team và Fact Game
+Ref: player_game.player_id > dim_player.player_id
+Ref: player_game.team_id > dim_team.team_id
+Ref: player_game.game_id > fact_team_game.game_id
