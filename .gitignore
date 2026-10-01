@@ -26,3 +26,11 @@ sơ lược môn học.txt
 # style for ai generated readme
 style.md
 readme.md
+
+# Lab submission folders to exclude
+BTA11/
+
+# Reference large PDFs
+tham khảo.pdf
+*.pdf
+!image/*.pdf

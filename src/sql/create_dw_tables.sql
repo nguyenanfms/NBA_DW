@@ -149,9 +149,10 @@ CREATE TABLE dbo.fact_team_game (
 
     CONSTRAINT PK_fact_team_game PRIMARY KEY CLUSTERED (fact_id),
     CONSTRAINT FK_fact_date FOREIGN KEY (date_key) REFERENCES dbo.dim_date(date_key),
-    CONSTRAINT FK_fact_season FOREIGN KEY (season_id) REFERENCES dbo.dim_season(season_id)
-    -- Lưu ý: Không tạo FK cứng cho team_id, opponent_id, arena_key để nạp toàn vẹn
-    -- lịch sử NBA từ 1946 (các đội và sân cũ đã giải thể) theo chuẩn Ralph Kimball.
+    CONSTRAINT FK_fact_season FOREIGN KEY (season_id) REFERENCES dbo.dim_season(season_id),
+    CONSTRAINT FK_fact_team FOREIGN KEY (team_id) REFERENCES dbo.dim_team(team_id),
+    CONSTRAINT FK_fact_opponent FOREIGN KEY (opponent_id) REFERENCES dbo.dim_team(team_id),
+    CONSTRAINT FK_fact_arena FOREIGN KEY (arena_key) REFERENCES dbo.dim_arena(arena_key)
 );
 GO
 

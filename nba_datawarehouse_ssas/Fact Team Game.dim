@@ -1,0 +1,181 @@
+﻿<Dimension xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ddl2="http://schemas.microsoft.com/analysisservices/2003/engine/2" xmlns:ddl2_2="http://schemas.microsoft.com/analysisservices/2003/engine/2/2" xmlns:ddl100_100="http://schemas.microsoft.com/analysisservices/2008/engine/100/100" xmlns:ddl200="http://schemas.microsoft.com/analysisservices/2010/engine/200" xmlns:ddl200_200="http://schemas.microsoft.com/analysisservices/2010/engine/200/200" xmlns:ddl300="http://schemas.microsoft.com/analysisservices/2011/engine/300" xmlns:ddl300_300="http://schemas.microsoft.com/analysisservices/2011/engine/300/300" xmlns:ddl400="http://schemas.microsoft.com/analysisservices/2012/engine/400" xmlns:ddl400_400="http://schemas.microsoft.com/analysisservices/2012/engine/400/400" xmlns:ddl500="http://schemas.microsoft.com/analysisservices/2013/engine/500" xmlns:ddl500_500="http://schemas.microsoft.com/analysisservices/2013/engine/500/500" xmlns:dwd="http://schemas.microsoft.com/DataWarehouse/Designer/1.0" dwd:design-time-name="ed59587c-8c9d-4c0e-a2d8-17ceef072961" xmlns="http://schemas.microsoft.com/analysisservices/2003/engine">
+  <ID>Fact Team Game</ID>
+  <Name>Fact Team Game</Name>
+  <CreatedTimestamp>0001-01-01T00:00:00Z</CreatedTimestamp>
+  <LastSchemaUpdate>0001-01-01T00:00:00Z</LastSchemaUpdate>
+  <Annotations>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramLayout</Name>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:ShowFriendlyNames</Name>
+      <Value>true</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:ShowRelationshipNames</Name>
+      <Value>false</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:UseDiagramDefaultLayout</Name>
+      <Value>true</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramViewPortLeft</Name>
+      <Value>0</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramViewPortTop</Name>
+      <Value>0</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramBoundingLeft</Name>
+      <Value>0</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramBoundingTop</Name>
+      <Value>0</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramZoom</Name>
+      <Value>100</Value>
+    </Annotation>
+  </Annotations>
+  <LastProcessed>0001-01-01T00:00:00Z</LastProcessed>
+  <State>Unprocessed</State>
+  <Source xsi:type="DataSourceViewBinding" dwd:design-time-name="6f1f1675-bf5d-4888-aa30-8c11171a0a85">
+    <DataSourceViewID>NBA DW</DataSourceViewID>
+  </Source>
+  <ErrorConfiguration dwd:design-time-name="4b5c4f18-f352-4fcb-bb53-2eba852762ae">
+    <KeyNotFound>ReportAndStop</KeyNotFound>
+    <KeyDuplicate>ReportAndStop</KeyDuplicate>
+    <NullKeyNotAllowed>ReportAndStop</NullKeyNotAllowed>
+  </ErrorConfiguration>
+  <CurrentStorageMode>Molap</CurrentStorageMode>
+  <Attributes>
+    <Attribute dwd:design-time-name="617467b5-0768-49a4-942b-3f46061860ec">
+      <ID>Fact Id</ID>
+      <Name>Fact Id</Name>
+      <Usage>Key</Usage>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="0ff1f06e-2c30-4522-96a7-1bf1b193b5fc">
+          <DataType>BigInt</DataType>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="9eb631e1-418d-46d1-ab6e-c245f5166a00">
+            <TableID>dbo_fact_team_game</TableID>
+            <ColumnID>fact_id</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <AttributeRelationships>
+        <AttributeRelationship dwd:design-time-name="b0d4f81d-55a2-484f-9f9e-28771fcc9176">
+          <AttributeID>Season Id</AttributeID>
+          <Name>Season Id</Name>
+        </AttributeRelationship>
+        <AttributeRelationship dwd:design-time-name="b4dfddc1-7784-4309-b3c1-ff672f329cad">
+          <AttributeID>Date Key</AttributeID>
+          <Name>Date Key</Name>
+        </AttributeRelationship>
+        <AttributeRelationship dwd:design-time-name="9368acf3-533e-4c41-8a22-d8acdc7fb2db">
+          <AttributeID>Opponent Id</AttributeID>
+          <Name>Opponent Id</Name>
+        </AttributeRelationship>
+        <AttributeRelationship dwd:design-time-name="6eb98eb2-5310-4a70-a4c4-737acc5b34d6">
+          <AttributeID>Team Id</AttributeID>
+          <Name>Team Id</Name>
+        </AttributeRelationship>
+        <AttributeRelationship dwd:design-time-name="8b94ea8d-db93-4e86-8a37-7a82ad322718">
+          <AttributeID>Arena Key</AttributeID>
+          <Name>Arena Key</Name>
+        </AttributeRelationship>
+      </AttributeRelationships>
+      <OrderBy>Key</OrderBy>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="28e8caec-b117-4f0e-beca-b6c4c757637c">
+      <ID>Season Id</ID>
+      <Name>Season Id</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="023173ac-fa02-4025-977c-c76f3849a61c">
+          <DataType>Integer</DataType>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="c74fcd9f-5dd1-465b-ab26-08a88c454ac3">
+            <TableID>dbo_fact_team_game</TableID>
+            <ColumnID>season_id</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <OrderBy>Key</OrderBy>
+      <AttributeHierarchyVisible>false</AttributeHierarchyVisible>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="ce1cb9db-71ef-4274-ae5f-d194bfab501b">
+      <ID>Date Key</ID>
+      <Name>Date Key</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="093d7944-9155-4ed5-9c11-f9e118a6395d">
+          <DataType>Integer</DataType>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="76b21fb3-ade4-486d-98e9-cd502838e072">
+            <TableID>dbo_fact_team_game</TableID>
+            <ColumnID>date_key</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <OrderBy>Key</OrderBy>
+      <AttributeHierarchyVisible>false</AttributeHierarchyVisible>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="bf2c5cc2-0001-4793-9a57-35a7e0546b96">
+      <ID>Opponent Id</ID>
+      <Name>Opponent Id</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="6946aae6-fe15-44b0-85d7-c4261d8315c8">
+          <DataType>BigInt</DataType>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="137832aa-a37f-4ffc-8446-8e47d2f69657">
+            <TableID>dbo_fact_team_game</TableID>
+            <ColumnID>opponent_id</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <OrderBy>Key</OrderBy>
+      <AttributeHierarchyVisible>false</AttributeHierarchyVisible>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="5613a4ec-ae04-42f5-84ed-8e4eca479a13">
+      <ID>Team Id</ID>
+      <Name>Team Id</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="50afa05c-da31-443d-882e-f79a039e3e65">
+          <DataType>BigInt</DataType>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="fd5f3adb-d602-4b39-8c79-be181dd47412">
+            <TableID>dbo_fact_team_game</TableID>
+            <ColumnID>team_id</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <OrderBy>Key</OrderBy>
+      <AttributeHierarchyVisible>false</AttributeHierarchyVisible>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="9ba118f4-8f3f-4c0c-b458-fa00801fe827">
+      <ID>Arena Key</ID>
+      <Name>Arena Key</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="b35125d2-2f64-458c-a07a-78176ef38fd4">
+          <DataType>Integer</DataType>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="9bb12978-d49d-4f3a-8c15-87fcbfc4ad7d">
+            <TableID>dbo_fact_team_game</TableID>
+            <ColumnID>arena_key</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <OrderBy>Key</OrderBy>
+      <AttributeHierarchyVisible>false</AttributeHierarchyVisible>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+  </Attributes>
+  <ddl300:ProcessingState>Unprocessed</ddl300:ProcessingState>
+</Dimension>

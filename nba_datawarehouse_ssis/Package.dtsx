@@ -12,8 +12,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Package"
   DTS:PackageType="5"
-  DTS:VersionBuild="60"
-  DTS:VersionGUID="{51CDACD4-870A-421F-9EC1-169C261CCB13}">
+  DTS:VersionBuild="63"
+  DTS:VersionGUID="{4C6EAB46-395E-4204-BE5B-F64A26B2C48E}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -10005,7 +10005,7 @@ where [refTable].[team_id] = ?</property>
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
           SQLTask:Connection="{20B8D6C7-2C4E-47EE-B322-6DB00F17EBAF}"
-          SQLTask:SqlStatementSource="-- 1. XÓA BẢNG CŨ NẾU ĐÃ TỒN TẠI (Thứ tự: Fact/Bridge trước, Dim sau để tránh kẹt khóa ngoại)&#xA;IF OBJECT_ID('dbo.player_game', 'U') IS NOT NULL DROP TABLE dbo.player_game;&#xA;IF OBJECT_ID('dbo.bridge_player_game', 'U') IS NOT NULL DROP TABLE dbo.bridge_player_game;&#xA;IF OBJECT_ID('dbo.fact_team_game', 'U') IS NOT NULL DROP TABLE dbo.fact_team_game;&#xA;IF OBJECT_ID('dbo.dim_player', 'U') IS NOT NULL DROP TABLE dbo.dim_player;&#xA;IF OBJECT_ID('dbo.dim_arena', 'U') IS NOT NULL DROP TABLE dbo.dim_arena;&#xA;IF OBJECT_ID('dbo.dim_team', 'U') IS NOT NULL DROP TABLE dbo.dim_team;&#xA;IF OBJECT_ID('dbo.dim_season', 'U') IS NOT NULL DROP TABLE dbo.dim_season;&#xA;IF OBJECT_ID('dbo.dim_date', 'U') IS NOT NULL DROP TABLE dbo.dim_date;&#xA;&#xA;-- 2. TẠO CÁC BẢNG DIMENSION (DIM TABLES)&#xA;-- A. dim_date (Chiều thời gian lịch)&#xA;CREATE TABLE dbo.dim_date (&#xA;    date_key            INT NOT NULL,&#xA;    full_date           DATE NOT NULL,&#xA;    year_number         SMALLINT NOT NULL,&#xA;    quarter_number      TINYINT NOT NULL,&#xA;    month_number        TINYINT NOT NULL,&#xA;    month_name          NVARCHAR(15) NOT NULL,&#xA;    day_of_week_name    NVARCHAR(15) NOT NULL,&#xA;    is_weekend          BIT NOT NULL,&#xA;    CONSTRAINT PK_dim_date PRIMARY KEY CLUSTERED (date_key)&#xA;);&#xA;&#xA;-- B. dim_season (Chiều mùa giải &amp; Kỷ nguyên - Natural Key)&#xA;CREATE TABLE dbo.dim_season (&#xA;    season_id           INT NOT NULL,&#xA;    season_display      NVARCHAR(15) NOT NULL,&#xA;    season_type         NVARCHAR(30) NOT NULL,&#xA;    era_name            NVARCHAR(50) NOT NULL,&#xA;    CONSTRAINT PK_dim_season PRIMARY KEY CLUSTERED (season_id)&#xA;);&#xA;&#xA;-- C. dim_team (Chiều đội bóng - Natural Key)&#xA;CREATE TABLE dbo.dim_team (&#xA;    team_id             BIGINT NOT NULL,&#xA;    full_name           NVARCHAR(100) NOT NULL,&#xA;    abbreviation        NVARCHAR(10) NOT NULL,&#xA;    city                NVARCHAR(50) NOT NULL,&#xA;    state               NVARCHAR(50) NOT NULL,&#xA;    conference          NVARCHAR(30) NOT NULL,&#xA;    division            NVARCHAR(30) NOT NULL,&#xA;    CONSTRAINT PK_dim_team PRIMARY KEY CLUSTERED (team_id)&#xA;);&#xA;&#xA;-- D. dim_arena (Chiều nhà thi đấu - Surrogate Key tự tăng)&#xA;CREATE TABLE dbo.dim_arena (&#xA;    arena_key           INT IDENTITY(1,1) NOT NULL,&#xA;    team_id             BIGINT NULL,&#xA;    arena_name          NVARCHAR(100) NOT NULL,&#xA;    arena_capacity      INT NULL,&#xA;    city                NVARCHAR(50) NULL,&#xA;    owner               NVARCHAR(100) NULL,&#xA;    head_coach          NVARCHAR(100) NULL,&#xA;    CONSTRAINT PK_dim_arena PRIMARY KEY CLUSTERED (arena_key)&#xA;);&#xA;&#xA;-- E. dim_player (Chiều cầu thủ - Natural Key)&#xA;CREATE TABLE dbo.dim_player (&#xA;    player_id           INT NOT NULL,&#xA;    full_name           NVARCHAR(100) NOT NULL,&#xA;    is_active           BIT NOT NULL,&#xA;    position            NVARCHAR(30) NULL,&#xA;    height              NVARCHAR(10) NULL,&#xA;    weight              FLOAT NULL,&#xA;    country             NVARCHAR(50) NULL,&#xA;    birthdate           DATE NULL,&#xA;    draft_round_num     INT NULL,&#xA;    draft_overall_pick  INT NULL,&#xA;    from_year           SMALLINT NULL,&#xA;    to_year             SMALLINT NULL,&#xA;    CONSTRAINT PK_dim_player PRIMARY KEY CLUSTERED (player_id)&#xA;);&#xA;&#xA;-- 3. TẠO BẢNG FACT TRUNG TÂM (fact_team_game - Grain: 1 đội / 1 trận)&#xA;CREATE TABLE dbo.fact_team_game (&#xA;    fact_id             BIGINT IDENTITY(1,1) NOT NULL,&#xA;    game_id             NVARCHAR(30) NOT NULL,&#xA;    date_key            INT NOT NULL,&#xA;    season_id           INT NOT NULL,&#xA;    team_id             BIGINT NOT NULL,&#xA;    opponent_id         BIGINT NOT NULL,&#xA;    arena_key           INT NULL,&#xA;    is_home             TINYINT NOT NULL,&#xA;    is_win              TINYINT NOT NULL,&#xA;    pts                 FLOAT NOT NULL,&#xA;    pts_opponent        FLOAT NOT NULL,&#xA;    plus_minus          INT NOT NULL,&#xA;    fgm                 FLOAT NULL,&#xA;    fga                 FLOAT NULL,&#xA;    fg3m                FLOAT NULL,&#xA;    fg3a                FLOAT NULL,&#xA;    reb                 FLOAT NULL,&#xA;    ast                 FLOAT NULL,&#xA;    tov                 FLOAT NULL,&#xA;    pts_paint           FLOAT NULL,&#xA;    pts_fast_break      FLOAT NULL,&#xA;    game_count          TINYINT DEFAULT 1 NOT NULL,&#xA;    CONSTRAINT PK_fact_team_game PRIMARY KEY CLUSTERED (fact_id),&#xA;    CONSTRAINT FK_fact_date FOREIGN KEY (date_key) REFERENCES dbo.dim_date(date_key),&#xA;    CONSTRAINT FK_fact_season FOREIGN KEY (season_id) REFERENCES dbo.dim_season(season_id)&#xA;);&#xA;&#xA;-- 4. TẠO BẢNG CẦU NỐI CẦU THỦ ↔ TRẬN ĐẤU (player_game)&#xA;CREATE TABLE dbo.player_game (&#xA;    game_id             NVARCHAR(30) NOT NULL,&#xA;    player_id           INT NOT NULL,&#xA;    team_id             BIGINT NOT NULL,&#xA;    CONSTRAINT PK_player_game PRIMARY KEY CLUSTERED (game_id, player_id),&#xA;    CONSTRAINT FK_player_game_player FOREIGN KEY (player_id) REFERENCES dbo.dim_player(player_id),&#xA;    CONSTRAINT FK_player_game_team FOREIGN KEY (team_id) REFERENCES dbo.dim_team(team_id)&#xA;);&#xA;&#xA;-- 5. TẠO CÁC CHỈ MỤC (INDEX) TỐI ƯU TRUY VẤN OLAP&#xA;CREATE NONCLUSTERED INDEX IX_fact_date ON dbo.fact_team_game(date_key);&#xA;CREATE NONCLUSTERED INDEX IX_fact_season ON dbo.fact_team_game(season_id);&#xA;CREATE NONCLUSTERED INDEX IX_fact_team ON dbo.fact_team_game(team_id);&#xA;CREATE NONCLUSTERED INDEX IX_fact_opponent ON dbo.fact_team_game(opponent_id);&#xA;CREATE NONCLUSTERED INDEX IX_fact_arena ON dbo.fact_team_game(arena_key);&#xA;CREATE NONCLUSTERED INDEX IX_fact_game_id ON dbo.fact_team_game(game_id);&#xA;&#xA;CREATE NONCLUSTERED INDEX IX_player_game_player ON dbo.player_game(player_id);&#xA;CREATE NONCLUSTERED INDEX IX_player_game_team ON dbo.player_game(team_id);" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          SQLTask:SqlStatementSource="-- ==============================================================================&#xA;-- KHO DỮ LIỆU BÓNG RỔ NBA (NBA_DW) — MÔ HÌNH STAR SCHEMA&#xA;-- Hệ quản trị: Microsoft SQL Server (Chạy trên Visual Studio / LocalDB / SSMS)&#xA;-- ==============================================================================&#xA;-- THAY ĐỔI SO VỚI PHIÊN BẢN CŨ:&#xA;--   1. dim_season: Bỏ season_key IDENTITY → Dùng season_id (INT) làm PK (0 duplicate)&#xA;--   2. dim_team:   Bỏ team_key IDENTITY  → Dùng team_id (BIGINT) làm PK (0 duplicate)&#xA;--   3. dim_player:  THÊM MỚI — Chiều cầu thủ, PK = player_id (0 duplicate)&#xA;--   4. player_game: THÊM MỚI — Liên kết cầu thủ ↔ trận đấu (many-to-many)&#xA;--   5. fact_team_game: FK đổi từ surrogate key sang natural key&#xA;-- ==============================================================================&#xA;&#xA;-- 1. TẠO CƠ SỞ DỮ LIỆU (Nếu chưa có)&#xA;IF NOT EXISTS (SELECT name FROM sys.databases WHERE name = N'NBA_DW')&#xA;BEGIN&#xA;    CREATE DATABASE NBA_DW;&#xA;END&#xA;GO&#xA;&#xA;USE NBA_DW;&#xA;GO&#xA;&#xA;-- 2. XÓA CÁC BẢNG CŨ NẾU ĐÃ TỒN TẠI (Thứ tự: Fact/Bridge trước, Dim sau)&#xA;IF OBJECT_ID('dbo.player_game', 'U') IS NOT NULL DROP TABLE dbo.player_game;&#xA;IF OBJECT_ID('dbo.bridge_player_game', 'U') IS NOT NULL DROP TABLE dbo.bridge_player_game;&#xA;IF OBJECT_ID('dbo.fact_team_game', 'U') IS NOT NULL DROP TABLE dbo.fact_team_game;&#xA;IF OBJECT_ID('dbo.dim_player', 'U') IS NOT NULL DROP TABLE dbo.dim_player;&#xA;IF OBJECT_ID('dbo.dim_arena', 'U') IS NOT NULL DROP TABLE dbo.dim_arena;&#xA;IF OBJECT_ID('dbo.dim_team', 'U') IS NOT NULL DROP TABLE dbo.dim_team;&#xA;IF OBJECT_ID('dbo.dim_season', 'U') IS NOT NULL DROP TABLE dbo.dim_season;&#xA;IF OBJECT_ID('dbo.dim_date', 'U') IS NOT NULL DROP TABLE dbo.dim_date;&#xA;GO&#xA;&#xA;-- ==============================================================================&#xA;-- 3. TẠO CÁC BẢNG DIMENSION (DIM TABLES)&#xA;-- ==============================================================================&#xA;&#xA;-- A. DIM DATE: Chiều thời gian lịch (8 cột)&#xA;CREATE TABLE dbo.dim_date (&#xA;    date_key            INT NOT NULL,                  -- Định dạng YYYYMMDD (PK)&#xA;    full_date           DATE NOT NULL,                 -- Ngày đầy đủ YYYY-MM-DD&#xA;    year_number         SMALLINT NOT NULL,             -- Năm (vd: 2023)&#xA;    quarter_number      TINYINT NOT NULL,              -- Quý (1 - 4)&#xA;    month_number        TINYINT NOT NULL,              -- Tháng (1 - 12)&#xA;    month_name          NVARCHAR(15) NOT NULL,         -- Tên tháng (January, February...)&#xA;    day_of_week_name    NVARCHAR(15) NOT NULL,         -- Thứ trong tuần (Monday... Sunday)&#xA;    is_weekend          BIT NOT NULL,                  -- 1 = Cuối tuần, 0 = Ngày thường&#xA;    CONSTRAINT PK_dim_date PRIMARY KEY CLUSTERED (date_key)&#xA;);&#xA;GO&#xA;&#xA;-- B. DIM SEASON: Chiều mùa giải &amp; Kỷ nguyên (4 cột)&#xA;--    PK = season_id (Khóa tự nhiên từ NBA, đã kiểm tra 0 duplicate / 225 dòng)&#xA;--    Chữ số đầu encode season_type: 1=Pre Season, 2=Regular, 3=All-Star, 4=Playoffs&#xA;CREATE TABLE dbo.dim_season (&#xA;    season_id           INT NOT NULL,                  -- Mã mùa giải gốc làm PK (vd: 22022)&#xA;    season_display      NVARCHAR(15) NOT NULL,         -- Tên hiển thị (vd: '2022-23')&#xA;    season_type         NVARCHAR(30) NOT NULL,         -- 'Regular Season' / 'Playoffs' / 'All-Star' / 'Pre Season'&#xA;    era_name            NVARCHAR(50) NOT NULL,         -- Phân loại kỷ nguyên NBA&#xA;    CONSTRAINT PK_dim_season PRIMARY KEY CLUSTERED (season_id)&#xA;);&#xA;GO&#xA;&#xA;-- C. DIM TEAM: Chiều đội bóng — Phân cấp League -&gt; Conference -&gt; Division -&gt; Team (7 cột)&#xA;--    PK = team_id (Khóa tự nhiên từ NBA, đã kiểm tra 0 duplicate / 30 đội)&#xA;CREATE TABLE dbo.dim_team (&#xA;    team_id             BIGINT NOT NULL,               -- ID gốc của NBA làm PK (vd: 1610612747)&#xA;    full_name           NVARCHAR(100) NOT NULL,        -- Tên đầy đủ (Los Angeles Lakers)&#xA;    abbreviation        NVARCHAR(10) NOT NULL,         -- Viết tắt (LAL, GSW, BOS)&#xA;    city                NVARCHAR(50) NOT NULL,         -- Thành phố (Los Angeles)&#xA;    state               NVARCHAR(50) NOT NULL,         -- Bang (California)&#xA;    conference          NVARCHAR(30) NOT NULL,         -- 'Eastern Conference' / 'Western Conference'&#xA;    division            NVARCHAR(30) NOT NULL,         -- 6 phân khu (Atlantic, Pacific...)&#xA;    CONSTRAINT PK_dim_team PRIMARY KEY CLUSTERED (team_id)&#xA;);&#xA;GO&#xA;&#xA;-- D. DIM ARENA: Chiều nhà thi đấu / Sân vận động (7 cột)&#xA;CREATE TABLE dbo.dim_arena (&#xA;    arena_key           INT IDENTITY(1,1) NOT NULL,    -- Khóa thay thế tự tăng (PK)&#xA;    team_id             BIGINT NULL,                   -- ID đội chủ quản của sân (để Lookup từ Fact)&#xA;    arena_name          NVARCHAR(100) NOT NULL,        -- Tên nhà thi đấu (Crypto.com Arena)&#xA;    arena_capacity      INT NULL,                      -- Sức chứa khán giả&#xA;    city                NVARCHAR(50) NULL,             -- Thành phố đặt sân&#xA;    owner               NVARCHAR(100) NULL,            -- Chủ sở hữu đội bóng&#xA;    head_coach          NVARCHAR(100) NULL,            -- Huấn luyện viên trưởng&#xA;    CONSTRAINT PK_dim_arena PRIMARY KEY CLUSTERED (arena_key)&#xA;);&#xA;GO&#xA;&#xA;-- E. DIM PLAYER: Chiều cầu thủ — THÊM MỚI (12 cột)&#xA;--    PK = player_id (Khóa tự nhiên từ NBA, đã kiểm tra 0 duplicate / 4,831 cầu thủ)&#xA;CREATE TABLE dbo.dim_player (&#xA;    player_id           INT NOT NULL,                  -- ID cầu thủ từ NBA làm PK&#xA;    full_name           NVARCHAR(100) NOT NULL,        -- Họ tên đầy đủ (LeBron James)&#xA;    is_active           BIT NOT NULL,                  -- 1 = Đang thi đấu, 0 = Đã giải nghệ&#xA;    position            NVARCHAR(30) NULL,             -- Vị trí (Guard, Forward, Center...)&#xA;    height              NVARCHAR(10) NULL,             -- Chiều cao (6-9, 7-1...)&#xA;    weight              FLOAT NULL,                    -- Cân nặng (lbs)&#xA;    country             NVARCHAR(50) NULL,             -- Quốc tịch (USA, France...)&#xA;    birthdate           DATE NULL,                     -- Ngày sinh&#xA;    draft_round_num     INT NULL,                      -- Vòng draft (1, 2, hoặc NULL = Undrafted)&#xA;    draft_overall_pick  INT NULL,                      -- Thứ tự pick tổng (1, 2, 3...)&#xA;    from_year           SMALLINT NULL,                 -- Năm bắt đầu sự nghiệp NBA&#xA;    to_year             SMALLINT NULL,                 -- Năm kết thúc / năm hiện tại&#xA;    CONSTRAINT PK_dim_player PRIMARY KEY CLUSTERED (player_id)&#xA;);&#xA;GO&#xA;&#xA;-- ==============================================================================&#xA;-- 4. TẠO BẢNG FACT TRUNG TÂM (FACT_TEAM_GAME - 22 CỘT)&#xA;-- Grain: 1 dòng = hiệu suất của 1 đội bóng trong 1 trận đấu&#xA;-- ==============================================================================&#xA;CREATE TABLE dbo.fact_team_game (&#xA;    fact_id             BIGINT IDENTITY(1,1) NOT NULL, -- Khóa chính thay thế tự tăng (PK)&#xA;    game_id             NVARCHAR(30) NOT NULL,         -- Degenerate Dimension (Mã trận gốc)&#xA;    date_key            INT NOT NULL,                  -- FK → dim_date&#xA;    season_id           INT NOT NULL,                  -- FK → dim_season (đổi từ season_key)&#xA;    team_id             BIGINT NOT NULL,               -- FK → dim_team (đổi từ team_key)&#xA;    opponent_id         BIGINT NOT NULL,               -- FK → dim_team (đổi từ opponent_key)&#xA;    arena_key           INT NULL,                      -- FK → dim_arena (cho phép NULL nếu trận không rõ sân)&#xA;&#xA;    -- Cờ trạng thái &amp; Mục tiêu phân tích (Flags &amp; Targets)&#xA;    is_home             TINYINT NOT NULL,              -- 1 = Sân nhà, 0 = Sân khách&#xA;    is_win              TINYINT NOT NULL,              -- 1 = Chiến thắng, 0 = Thua (Target chính)&#xA;&#xA;    -- Số đo Điểm số &amp; Hiệu số (Scoring Measures - Additive)&#xA;    pts                 FLOAT NOT NULL,                -- Điểm số ghi được&#xA;    pts_opponent        FLOAT NOT NULL,                -- Điểm đối thủ ghi (điểm thủng lưới)&#xA;    plus_minus          INT NOT NULL,                  -- Hiệu số bàn thắng bại (pts - pts_opponent)&#xA;&#xA;    -- Số đo Ném rổ (Shooting Measures - Additive)&#xA;    fgm                 FLOAT NULL,                    -- Field Goals Made (Ném rổ trúng)&#xA;    fga                 FLOAT NULL,                    -- Field Goals Attempted (Số lần dứt điểm)&#xA;    fg3m                FLOAT NULL,                    -- 3-Point Made (Ném 3 điểm trúng)&#xA;    fg3a                FLOAT NULL,                    -- 3-Point Attempted (Số lần ném 3 điểm)&#xA;&#xA;    -- Số đo Kiểm soát bóng &amp; Phối hợp (Ball Control &amp; Teamplay)&#xA;    reb                 FLOAT NULL,                    -- Total Rebounds (Tổng bắt bóng bật bảng)&#xA;    ast                 FLOAT NULL,                    -- Assists (Số pha kiến tạo thành bàn)&#xA;    tov                 FLOAT NULL,                    -- Turnovers (Số lần làm mất bóng)&#xA;&#xA;    -- Số đo Chiến thuật chuyên sâu (Tactical Measures)&#xA;    pts_paint           FLOAT NULL,                    -- Điểm ghi trong khu vực cận rổ (vùng sơn)&#xA;    pts_fast_break      FLOAT NULL,                    -- Điểm ghi từ phản công nhanh (Fast Break)&#xA;&#xA;    -- Số đo Hằng số đếm (Counting Measure)&#xA;    game_count          TINYINT DEFAULT 1 NOT NULL,    -- Luôn = 1 để tính số trận cực nhanh&#xA;&#xA;    CONSTRAINT PK_fact_team_game PRIMARY KEY CLUSTERED (fact_id),&#xA;    CONSTRAINT FK_fact_date FOREIGN KEY (date_key) REFERENCES dbo.dim_date(date_key),&#xA;    CONSTRAINT FK_fact_season FOREIGN KEY (season_id) REFERENCES dbo.dim_season(season_id),&#xA;    CONSTRAINT FK_fact_team FOREIGN KEY (team_id) REFERENCES dbo.dim_team(team_id),&#xA;    CONSTRAINT FK_fact_opponent FOREIGN KEY (opponent_id) REFERENCES dbo.dim_team(team_id),&#xA;    CONSTRAINT FK_fact_arena FOREIGN KEY (arena_key) REFERENCES dbo.dim_arena(arena_key)&#xA;);&#xA;GO&#xA;&#xA;-- ==============================================================================&#xA;-- 5. TẠO BẢNG PLAYER_GAME: LIÊN KẾT CẦU THỦ ↔ TRẬN ĐẤU (MANY-TO-MANY)&#xA;-- Grain: 1 dòng = 1 cầu thủ tham gia 1 trận đấu, cho 1 đội cụ thể&#xA;-- Nguồn: Extract từ play_by_play.csv (2.2GB) → ~617K dòng sau khi clean&#xA;-- ==============================================================================&#xA;CREATE TABLE dbo.player_game (&#xA;    game_id             NVARCHAR(30) NOT NULL,         -- Mã trận đấu (liên kết với fact qua game_id)&#xA;    player_id           INT NOT NULL,                  -- FK → dim_player&#xA;    team_id             BIGINT NOT NULL,               -- FK → dim_team (đội mà cầu thủ chơi trận này)&#xA;    CONSTRAINT PK_player_game PRIMARY KEY CLUSTERED (game_id, player_id),&#xA;    CONSTRAINT FK_player_game_player FOREIGN KEY (player_id) REFERENCES dbo.dim_player(player_id),&#xA;    CONSTRAINT FK_player_game_team FOREIGN KEY (team_id) REFERENCES dbo.dim_team(team_id)&#xA;);&#xA;GO&#xA;&#xA;-- ==============================================================================&#xA;-- 6. TẠO INDEX ĐỂ TỐI ƯU TRUY VẤN OLAP&#xA;-- ==============================================================================&#xA;-- Index trên fact_team_game&#xA;CREATE NONCLUSTERED INDEX IX_fact_date ON dbo.fact_team_game(date_key);&#xA;CREATE NONCLUSTERED INDEX IX_fact_season ON dbo.fact_team_game(season_id);&#xA;CREATE NONCLUSTERED INDEX IX_fact_team ON dbo.fact_team_game(team_id);&#xA;CREATE NONCLUSTERED INDEX IX_fact_opponent ON dbo.fact_team_game(opponent_id);&#xA;CREATE NONCLUSTERED INDEX IX_fact_arena ON dbo.fact_team_game(arena_key);&#xA;CREATE NONCLUSTERED INDEX IX_fact_game_id ON dbo.fact_team_game(game_id);&#xA;&#xA;-- Index trên player_game&#xA;CREATE NONCLUSTERED INDEX IX_player_game_player ON dbo.player_game(player_id);&#xA;CREATE NONCLUSTERED INDEX IX_player_game_team ON dbo.player_game(team_id);&#xA;GO&#xA;&#xA;PRINT N'TẠO CẤU TRÚC STAR SCHEMA TRONG NBA_DW THÀNH CÔNG!';&#xA;GO&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
       </DTS:ObjectData>
     </DTS:Executable>
   </DTS:Executables>
@@ -10082,38 +10082,38 @@ where [refTable].[team_id] = ?</property>
         <NodeLayout
           Size="157.333333333334,42.6666666666667"
           Id="Package\DFT - DimArena"
-          TopLeft="323.749985527248,320.894733318744" />
+          TopLeft="356.562484060415,164.666664858659" />
         <NodeLayout
           Size="150.666666666667,42.6666666666667"
           Id="Package\DFT - DimDate"
-          TopLeft="543.124975720421,489.210520944355" />
+          TopLeft="563.437474812381,328.421049025581" />
         <NodeLayout
           Size="158.666666666667,42.6666666666667"
           Id="Package\DFT - DimPlayer"
-          TopLeft="533.124976167456,406.421048169156" />
+          TopLeft="565.937474700623,250.192979709071" />
         <NodeLayout
           Size="165.333333333334,42.6666666666667"
           Id="Package\DFT - DimSeason"
-          TopLeft="523.749976586551,320.210522799941" />
+          TopLeft="556.562475119718,163.982454339856" />
         <NodeLayout
           Size="156,42.6666666666667"
           Id="Package\DFT - DimTeam"
-          TopLeft="127.499994300306,321.578943837547" />
+          TopLeft="160.312492833473,165.350875377462" />
         <NodeLayout
           Size="186.666666666667,42.6666666666667"
           Id="Package\DFT - FactTeamGame"
-          TopLeft="104.374995334074,487.157889387945" />
+          TopLeft="137.187493867241,330.92982092786" />
         <NodeLayout
           Size="169.333333333334,42.6666666666667"
           Id="Package\DFT - PlayerGame"
-          TopLeft="331.249985191972,490.578941981961" />
+          TopLeft="352.604150904033,328.078943766179" />
         <NodeLayout
           Size="240,42.6666666666667"
           Id="Package\SQL - Delete, Recreate All Tables"
-          TopLeft="109.999995082617,241.526313137562" />
+          TopLeft="117.812494733371,67.6228062750584" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint]"
-          TopLeft="283.499994300306,342.570171911479">
+          TopLeft="316.312492833473,186.342103451394">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -10135,7 +10135,7 @@ where [refTable].[team_id] = ?</property>
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 1]"
-          TopLeft="609.437476377004,362.877189466608">
+          TopLeft="642.249974910171,206.649121006523">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -10157,7 +10157,7 @@ where [refTable].[team_id] = ?</property>
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 2]"
-          TopLeft="481.083318860581,341.885961392676">
+          TopLeft="513.895817393748,185.657892932591">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -10179,30 +10179,18 @@ where [refTable].[team_id] = ?</property>
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 3]"
-          TopLeft="229.999995082617,284.192979804229">
+          TopLeft="238.062493783422,110.289472941725">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-24.500000782311,37.3859640333184"
+              EndConnector="0,55.0614024357367"
               Start="0,0"
-              End="-24.500000782311,29.8859640333184">
+              End="0,47.5614024357367">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,14.6929820166592" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,14.6929820166592"
-                    Point2="0,18.6929820166592"
-                    Point3="-4,18.6929820166592" />
-                  <mssgle:LineSegment
-                    End="-20.500000782311,18.6929820166592" />
-                  <mssgle:CubicBezierSegment
-                    Point1="-20.500000782311,18.6929820166592"
-                    Point2="-24.500000782311,18.6929820166592"
-                    Point3="-24.500000782311,22.6929820166592" />
-                  <mssgle:LineSegment
-                    End="-24.500000782311,29.8859640333184" />
+                    End="0,47.5614024357367" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -10213,18 +10201,18 @@ where [refTable].[team_id] = ?</property>
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 4]"
-          TopLeft="615.458309277272,449.087714835823">
+          TopLeft="642.020808089836,292.859646375737">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,40.1228061085323"
+              EndConnector="0,35.5614026498437"
               Start="0,0"
-              End="0,32.6228061085323">
+              End="0,28.0614026498437">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,32.6228061085323" />
+                    End="0,28.0614026498437" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -10235,18 +10223,18 @@ where [refTable].[team_id] = ?</property>
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 5]"
-          TopLeft="543.124975720421,511.228064796491">
+          TopLeft="563.437474812381,349.583329729213">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-42.5416571951162,0"
+              EndConnector="-41.499990575015,0"
               Start="0,0"
-              End="-35.0416571951162,0">
+              End="-33.999990575015,0">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="-35.0416571951162,0" />
+                    End="-33.999990575015,0" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -10257,18 +10245,18 @@ where [refTable].[team_id] = ?</property>
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 6]"
-          TopLeft="331.249985191972,510.201749018286">
+          TopLeft="352.604150904033,350.837715680353">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-40.2083231912308,0"
+              EndConnector="-28.7499903701254,0"
               Start="0,0"
-              End="-32.7083231912308,0">
+              End="-21.2499903701254,0">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="-32.7083231912308,0" />
+                    End="-21.2499903701254,0" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -10284,7 +10272,7 @@ where [refTable].[team_id] = ?</property>
     design-time-name="Package\DFT - DimArena">
     <LayoutInfo>
       <GraphLayout
-        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
           Size="154.666666666667,42.6666666666667"
           Id="Package\DFT - DimArena\Flat File Source"
@@ -10316,7 +10304,9 @@ where [refTable].[team_id] = ?</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -10338,7 +10328,9 @@ where [refTable].[team_id] = ?</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -10821,7 +10813,9 @@ where [refTable].[team_id] = ?</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -10855,7 +10849,9 @@ where [refTable].[team_id] = ?</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -10889,7 +10885,9 @@ where [refTable].[team_id] = ?</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -10935,7 +10933,9 @@ where [refTable].[team_id] = ?</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -10969,7 +10969,9 @@ where [refTable].[team_id] = ?</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -11003,7 +11005,9 @@ where [refTable].[team_id] = ?</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -11025,7 +11029,9 @@ where [refTable].[team_id] = ?</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>

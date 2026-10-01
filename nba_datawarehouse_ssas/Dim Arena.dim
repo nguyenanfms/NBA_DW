@@ -1,0 +1,202 @@
+﻿<Dimension xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ddl2="http://schemas.microsoft.com/analysisservices/2003/engine/2" xmlns:ddl2_2="http://schemas.microsoft.com/analysisservices/2003/engine/2/2" xmlns:ddl100_100="http://schemas.microsoft.com/analysisservices/2008/engine/100/100" xmlns:ddl200="http://schemas.microsoft.com/analysisservices/2010/engine/200" xmlns:ddl200_200="http://schemas.microsoft.com/analysisservices/2010/engine/200/200" xmlns:ddl300="http://schemas.microsoft.com/analysisservices/2011/engine/300" xmlns:ddl300_300="http://schemas.microsoft.com/analysisservices/2011/engine/300/300" xmlns:ddl400="http://schemas.microsoft.com/analysisservices/2012/engine/400" xmlns:ddl400_400="http://schemas.microsoft.com/analysisservices/2012/engine/400/400" xmlns:ddl500="http://schemas.microsoft.com/analysisservices/2013/engine/500" xmlns:ddl500_500="http://schemas.microsoft.com/analysisservices/2013/engine/500/500" xmlns:dwd="http://schemas.microsoft.com/DataWarehouse/Designer/1.0" dwd:design-time-name="572c4d4b-cf2b-4a03-81c4-a5a6fc059eea" xmlns="http://schemas.microsoft.com/analysisservices/2003/engine">
+  <ID>Dim Arena</ID>
+  <Name>Dim Arena</Name>
+  <CreatedTimestamp>0001-01-01T00:00:00Z</CreatedTimestamp>
+  <LastSchemaUpdate>0001-01-01T00:00:00Z</LastSchemaUpdate>
+  <Annotations>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramLayout</Name>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:ShowFriendlyNames</Name>
+      <Value>true</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:ShowRelationshipNames</Name>
+      <Value>false</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:UseDiagramDefaultLayout</Name>
+      <Value>true</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramViewPortLeft</Name>
+      <Value>0</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramViewPortTop</Name>
+      <Value>0</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramBoundingLeft</Name>
+      <Value>0</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramBoundingTop</Name>
+      <Value>0</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramZoom</Name>
+      <Value>100</Value>
+    </Annotation>
+  </Annotations>
+  <LastProcessed>0001-01-01T00:00:00Z</LastProcessed>
+  <State>Unprocessed</State>
+  <Source xsi:type="DataSourceViewBinding" dwd:design-time-name="ec59f9d2-e901-42d1-af71-ec5405113de5">
+    <DataSourceViewID>NBA DW</DataSourceViewID>
+  </Source>
+  <UnknownMember>Visible</UnknownMember>
+  <ErrorConfiguration dwd:design-time-name="a616b54d-dbb4-447f-8017-a1bc9d545e95">
+    <KeyNotFound>ReportAndStop</KeyNotFound>
+    <KeyDuplicate>ReportAndStop</KeyDuplicate>
+    <NullKeyNotAllowed>ReportAndStop</NullKeyNotAllowed>
+  </ErrorConfiguration>
+  <CurrentStorageMode>Molap</CurrentStorageMode>
+  <Attributes>
+    <Attribute dwd:design-time-name="aa5d007d-b4ea-488c-a3f5-84629a1ff7d7">
+      <ID>Arena Key</ID>
+      <Name>Arena Key</Name>
+      <Usage>Key</Usage>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="e1822dd4-44e5-41cd-a0b6-2d4af7048729">
+          <DataType>Integer</DataType>
+          <NullProcessing>UnknownMember</NullProcessing>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="a91c6314-7268-4be2-b572-d16273340a1a">
+            <TableID>dbo_dim_arena</TableID>
+            <ColumnID>arena_key</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <AttributeRelationships>
+        <AttributeRelationship dwd:design-time-name="ca1c1c6e-03ac-46f4-89af-6967362d0fc5">
+          <AttributeID>Team Id</AttributeID>
+          <Name>Team Id</Name>
+        </AttributeRelationship>
+        <AttributeRelationship dwd:design-time-name="4c433c6c-6324-4269-ac54-9e0c42c48deb">
+          <AttributeID>Arena Name</AttributeID>
+          <Name>Arena Name</Name>
+        </AttributeRelationship>
+        <AttributeRelationship dwd:design-time-name="96ff1af9-c65e-4378-ad41-829ee74aec32">
+          <AttributeID>Arena Capacity</AttributeID>
+          <Name>Arena Capacity</Name>
+        </AttributeRelationship>
+        <AttributeRelationship dwd:design-time-name="dcc022a4-14ca-45c7-a521-ad8335b079bc">
+          <AttributeID>City</AttributeID>
+          <Name>City</Name>
+        </AttributeRelationship>
+        <AttributeRelationship dwd:design-time-name="d282a768-ab06-4f3b-9a7d-1f3e00bf00cd">
+          <AttributeID>Owner</AttributeID>
+          <Name>Owner</Name>
+        </AttributeRelationship>
+        <AttributeRelationship dwd:design-time-name="ba4d9c7b-82be-4a0e-a85b-82768020aa52">
+          <AttributeID>Head Coach</AttributeID>
+          <Name>Head Coach</Name>
+        </AttributeRelationship>
+      </AttributeRelationships>
+      <OrderBy>Key</OrderBy>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="156c66c5-d783-4e4d-8aef-4610a1ee5feb">
+      <ID>Team Id</ID>
+      <Name>Team Id</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="e45f0026-459e-4484-a65b-acc95210a7c1">
+          <DataType>BigInt</DataType>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="5bf7f6a4-c00b-4292-9f6e-068643fe7d66">
+            <TableID>dbo_dim_arena</TableID>
+            <ColumnID>team_id</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <OrderBy>Key</OrderBy>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="643a08d2-8626-4efc-944e-f75222b8ce78">
+      <ID>Arena Name</ID>
+      <Name>Arena Name</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="ca35e9b0-8d58-485e-8297-441d1c8f7758">
+          <DataType>WChar</DataType>
+          <DataSize>100</DataSize>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="53551cb9-2cab-411e-be3c-7627a7e132ca">
+            <TableID>dbo_dim_arena</TableID>
+            <ColumnID>arena_name</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <OrderBy>Key</OrderBy>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="7877a76a-a2e9-4b34-a253-329ef6fa6e69">
+      <ID>Arena Capacity</ID>
+      <Name>Arena Capacity</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="f211e45c-1eeb-41df-97bf-326fc782dc78">
+          <DataType>Integer</DataType>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="f28823b4-70ab-4980-98d7-69976cc358c0">
+            <TableID>dbo_dim_arena</TableID>
+            <ColumnID>arena_capacity</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <OrderBy>Key</OrderBy>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="3fcf8d54-21ce-4f8b-9dad-5f707a9ae8b9">
+      <ID>City</ID>
+      <Name>City</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="32a489f8-ac8f-4fb3-b7c1-653ac52761c1">
+          <DataType>WChar</DataType>
+          <DataSize>50</DataSize>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="bb9a724e-d9b1-4b86-b608-2b9393053bb3">
+            <TableID>dbo_dim_arena</TableID>
+            <ColumnID>city</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <OrderBy>Key</OrderBy>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="25e3f018-6737-47f4-b13d-e2f8a369a190">
+      <ID>Owner</ID>
+      <Name>Owner</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="5d536456-4a6b-451c-bcad-c9fa866f9afc">
+          <DataType>WChar</DataType>
+          <DataSize>100</DataSize>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="9866b7aa-0623-4a12-ae8c-e5187f0edd2d">
+            <TableID>dbo_dim_arena</TableID>
+            <ColumnID>owner</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <OrderBy>Key</OrderBy>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="4ad3f524-158f-4a8f-9b75-b90e478b12d1">
+      <ID>Head Coach</ID>
+      <Name>Head Coach</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="c8be40e7-7456-4da8-ad87-1c19a434e5b5">
+          <DataType>WChar</DataType>
+          <DataSize>100</DataSize>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="730a86ac-ce99-403b-b5e8-d754ff376857">
+            <TableID>dbo_dim_arena</TableID>
+            <ColumnID>head_coach</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <OrderBy>Key</OrderBy>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+  </Attributes>
+  <ddl300:ProcessingState>Unprocessed</ddl300:ProcessingState>
+</Dimension>
