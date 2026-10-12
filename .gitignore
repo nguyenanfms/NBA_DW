@@ -34,3 +34,12 @@ BTA11/
 tham khảo.pdf
 *.pdf
 !image/*.pdf
+
+# Bài tập trên lớp
+bài tập quá trình/*
+!bài tập quá trình/SSIS/
+bài tập quá trình/SSIS/*
+!bài tập quá trình/SSIS/Mau_bao_cao_SSIS_NBA.docx
+
+# Local document previews and working files
+tmp/
