@@ -26,7 +26,7 @@
           <SSIS:Property SSIS:Name="CreatorComputerName">DESKTOP-AHL2RE7</SSIS:Property>
           <SSIS:Property SSIS:Name="Description">
           </SSIS:Property>
-          <SSIS:Property SSIS:Name="PasswordVerifier" SSIS:Sensitive="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAD7u300zFYkSanFZmqha7QQAAAAACAAAAAAAQZgAAAAEAACAAAAB9UzReOeJl/L83V2l9sQFzsy/KQDvPc+xURtnvuQDH2wAAAAAOgAAAAAIAACAAAADyZf8jJ6s0R9d/zKkr+gxU0yroK/5ujLUQSL+uZzWlI5AAAAC7ttC5TZNx02dwUk1SQBX7sL+ixb8vRzXdAhN2CVkPot64Yg/fkotiSZ9dv90+nmNYJYO1UwuuLNwCYJLAcIF3VnUJvaCDK4sADyAgMOuOa4EmrYdAvLiWs+3SsUrG+fXQV26byRBD7uvUo8HkltNcx/QWTtr/4IMkbOsIh6ukZ0CEal6C5SjUEpIzCmwVGTlAAAAAUxsilP1O7T3fMWttzzFkct+RhkseHZExEh2i+wBs389K2cN/Qqk/an1L54fAanA15CyUbjFSs99qNpRCNX4NMw==</SSIS:Property>
+          <SSIS:Property SSIS:Name="PasswordVerifier" SSIS:Sensitive="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAA920L7uXxlkKOXCsQPenRUwAAAAACAAAAAAAQZgAAAAEAACAAAAC21Q3jy28IBSZaKnwr52opRZ3EC8Ua7B9DJYTS8EltgAAAAAAOgAAAAAIAACAAAADrnD7DubhOqxyfVDz+WQK+BZ6tUlIJlPBTe3Nwpw16BZAAAAAgWLa/SGlL1jCkA6HMrzBduu3/9xBj94e/4tK4WEHHP/slJMAYCbB6xD0ZxJOqETzthlXNgnturEIlVN5QBYRxRxxCNBlppJNs6fjiuARyVKcGZDs/B3hSC6fsIlH+XXEFoYG1I4Wm3eZSqXovGncY3wwBGjFrbfvu1D9KAAb2RJSJLb7WJ6EACYVRqI4Vcg9AAAAA+XzYbTH+lq0WJm5zL5KPL86RKviAduT6cwHCKC5xBS3YEqY3CfLPOe8e1/1XjR7Wh/Y6GxuozZANiK+Fu71LhQ==</SSIS:Property>
           <SSIS:Property SSIS:Name="FormatVersion">1</SSIS:Property>
         </SSIS:Properties>
         <SSIS:Packages>
@@ -39,20 +39,20 @@
             <SSIS:PackageMetaData SSIS:Name="Package.dtsx">
               <SSIS:Properties>
                 <SSIS:Property SSIS:Name="ID">{0242AC40-0DD6-4998-A98E-BE17E8F369EB}</SSIS:Property>
-                <SSIS:Property SSIS:Name="Name">Package</SSIS:Property>
+                <SSIS:Property SSIS:Name="Name">S</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionMajor">1</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionMinor">0</SSIS:Property>
-                <SSIS:Property SSIS:Name="VersionBuild">41</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionBuild">70</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionComments">
                 </SSIS:Property>
-                <SSIS:Property SSIS:Name="VersionGUID">{64000966-857F-4B13-A0B4-FF0AD423D782}</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionGUID">{3866E875-6D87-4263-B828-C6B2D82D2813}</SSIS:Property>
                 <SSIS:Property SSIS:Name="PackageFormatVersion">8</SSIS:Property>
                 <SSIS:Property SSIS:Name="Description">
                 </SSIS:Property>
                 <SSIS:Property SSIS:Name="ProtectionLevel">1</SSIS:Property>
               </SSIS:Properties>
               <SSIS:Parameters>
-                <SSIS:Parameter SSIS:Name="CM.(localdb)\MSSQLLocalDB.NBA_DW.ConnectByProxy">
+                <SSIS:Parameter SSIS:Name="CM.NBA_DW_SQLEXPRESS.ConnectByProxy">
                   <SSIS:Properties>
                     <SSIS:Property SSIS:Name="ID">
                     </SSIS:Property>
@@ -67,7 +67,7 @@
                     <SSIS:Property SSIS:Name="DataType">3</SSIS:Property>
                   </SSIS:Properties>
                 </SSIS:Parameter>
-                <SSIS:Parameter SSIS:Name="CM.(localdb)\MSSQLLocalDB.NBA_DW.ConnectionString">
+                <SSIS:Parameter SSIS:Name="CM.NBA_DW_SQLEXPRESS.ConnectionString">
                   <SSIS:Properties>
                     <SSIS:Property SSIS:Name="ID">
                     </SSIS:Property>
@@ -78,11 +78,11 @@
                     <SSIS:Property SSIS:Name="IncludeInDebugDump">0</SSIS:Property>
                     <SSIS:Property SSIS:Name="Required">0</SSIS:Property>
                     <SSIS:Property SSIS:Name="Sensitive">0</SSIS:Property>
-                    <SSIS:Property SSIS:Name="Value">Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=NBA_DW;Provider=MSOLEDBSQL.1;Integrated Security=SSPI;Application Name=SSIS-Package-{20B8D6C7-2C4E-47EE-B322-6DB00F17EBAF}(localdb)\MSSQLLocalDB.NBA_DW;Auto Translate=False;</SSIS:Property>
+                    <SSIS:Property SSIS:Name="Value">Data Source=DESKTOP-AHL2RE7\SQLEXPRESS;Initial Catalog=NBA_DW;Provider=MSOLEDBSQL.1;Integrated Security=SSPI;Auto Translate=False;Application Name=SSIS-Package-{20B8D6C7-2C4E-47EE-B322-6DB00F17EBAF}(localdb)\MSSQLLocalDB.NBA_DW;</SSIS:Property>
                     <SSIS:Property SSIS:Name="DataType">18</SSIS:Property>
                   </SSIS:Properties>
                 </SSIS:Parameter>
-                <SSIS:Parameter SSIS:Name="CM.(localdb)\MSSQLLocalDB.NBA_DW.ConnectRetryCount">
+                <SSIS:Parameter SSIS:Name="CM.NBA_DW_SQLEXPRESS.ConnectRetryCount">
                   <SSIS:Properties>
                     <SSIS:Property SSIS:Name="ID">
                     </SSIS:Property>
@@ -97,7 +97,7 @@
                     <SSIS:Property SSIS:Name="DataType">9</SSIS:Property>
                   </SSIS:Properties>
                 </SSIS:Parameter>
-                <SSIS:Parameter SSIS:Name="CM.(localdb)\MSSQLLocalDB.NBA_DW.ConnectRetryInterval">
+                <SSIS:Parameter SSIS:Name="CM.NBA_DW_SQLEXPRESS.ConnectRetryInterval">
                   <SSIS:Properties>
                     <SSIS:Property SSIS:Name="ID">
                     </SSIS:Property>
@@ -112,7 +112,7 @@
                     <SSIS:Property SSIS:Name="DataType">9</SSIS:Property>
                   </SSIS:Properties>
                 </SSIS:Parameter>
-                <SSIS:Parameter SSIS:Name="CM.(localdb)\MSSQLLocalDB.NBA_DW.ConnectUsingManagedIdentity">
+                <SSIS:Parameter SSIS:Name="CM.NBA_DW_SQLEXPRESS.ConnectUsingManagedIdentity">
                   <SSIS:Properties>
                     <SSIS:Property SSIS:Name="ID">
                     </SSIS:Property>
@@ -127,7 +127,7 @@
                     <SSIS:Property SSIS:Name="DataType">3</SSIS:Property>
                   </SSIS:Properties>
                 </SSIS:Parameter>
-                <SSIS:Parameter SSIS:Name="CM.(localdb)\MSSQLLocalDB.NBA_DW.InitialCatalog">
+                <SSIS:Parameter SSIS:Name="CM.NBA_DW_SQLEXPRESS.InitialCatalog">
                   <SSIS:Properties>
                     <SSIS:Property SSIS:Name="ID">
                     </SSIS:Property>
@@ -142,7 +142,7 @@
                     <SSIS:Property SSIS:Name="DataType">18</SSIS:Property>
                   </SSIS:Properties>
                 </SSIS:Parameter>
-                <SSIS:Parameter SSIS:Name="CM.(localdb)\MSSQLLocalDB.NBA_DW.Password">
+                <SSIS:Parameter SSIS:Name="CM.NBA_DW_SQLEXPRESS.Password">
                   <SSIS:Properties>
                     <SSIS:Property SSIS:Name="ID">
                     </SSIS:Property>
@@ -156,7 +156,7 @@
                     <SSIS:Property SSIS:Name="DataType">18</SSIS:Property>
                   </SSIS:Properties>
                 </SSIS:Parameter>
-                <SSIS:Parameter SSIS:Name="CM.(localdb)\MSSQLLocalDB.NBA_DW.RetainSameConnection">
+                <SSIS:Parameter SSIS:Name="CM.NBA_DW_SQLEXPRESS.RetainSameConnection">
                   <SSIS:Properties>
                     <SSIS:Property SSIS:Name="ID">
                     </SSIS:Property>
@@ -171,7 +171,7 @@
                     <SSIS:Property SSIS:Name="DataType">3</SSIS:Property>
                   </SSIS:Properties>
                 </SSIS:Parameter>
-                <SSIS:Parameter SSIS:Name="CM.(localdb)\MSSQLLocalDB.NBA_DW.ServerName">
+                <SSIS:Parameter SSIS:Name="CM.NBA_DW_SQLEXPRESS.ServerName">
                   <SSIS:Properties>
                     <SSIS:Property SSIS:Name="ID">
                     </SSIS:Property>
@@ -182,11 +182,11 @@
                     <SSIS:Property SSIS:Name="IncludeInDebugDump">0</SSIS:Property>
                     <SSIS:Property SSIS:Name="Required">0</SSIS:Property>
                     <SSIS:Property SSIS:Name="Sensitive">0</SSIS:Property>
-                    <SSIS:Property SSIS:Name="Value">(localdb)\MSSQLLocalDB</SSIS:Property>
+                    <SSIS:Property SSIS:Name="Value">DESKTOP-AHL2RE7\SQLEXPRESS</SSIS:Property>
                     <SSIS:Property SSIS:Name="DataType">18</SSIS:Property>
                   </SSIS:Properties>
                 </SSIS:Parameter>
-                <SSIS:Parameter SSIS:Name="CM.(localdb)\MSSQLLocalDB.NBA_DW.UserName">
+                <SSIS:Parameter SSIS:Name="CM.NBA_DW_SQLEXPRESS.UserName">
                   <SSIS:Properties>
                     <SSIS:Property SSIS:Name="ID">
                     </SSIS:Property>
@@ -559,6 +559,8 @@
                     <SSIS:Property SSIS:Name="IncludeInDebugDump">0</SSIS:Property>
                     <SSIS:Property SSIS:Name="Required">0</SSIS:Property>
                     <SSIS:Property SSIS:Name="Sensitive">0</SSIS:Property>
+                    <SSIS:Property SSIS:Name="Value">
+                    </SSIS:Property>
                     <SSIS:Property SSIS:Name="DataType">18</SSIS:Property>
                   </SSIS:Properties>
                 </SSIS:Parameter>

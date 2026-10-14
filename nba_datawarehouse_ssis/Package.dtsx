@@ -10,23 +10,23 @@
   DTS:ExecutableType="Microsoft.Package"
   DTS:LastModifiedProductVersion="17.0.1016.0"
   DTS:LocaleID="1033"
-  DTS:ObjectName="Package"
+  DTS:ObjectName="S"
   DTS:PackageType="5"
-  DTS:VersionBuild="67"
-  DTS:VersionGUID="{4F292ACB-D64B-49C3-952B-1F10FDDC0D96}">
+  DTS:VersionBuild="76"
+  DTS:VersionGUID="{C219965C-33BB-47FD-A1E7-C65E2E5C6362}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
     <DTS:ConnectionManager
-      DTS:refId="Package.ConnectionManagers[(localdb)\MSSQLLocalDB.NBA_DW]"
+      DTS:refId="Package.ConnectionManagers[NBA_DW_SQLEXPRESS]"
       DTS:CreationName="OLEDB"
       DTS:DTSID="{20B8D6C7-2C4E-47EE-B322-6DB00F17EBAF}"
-      DTS:ObjectName="(localdb)\MSSQLLocalDB.NBA_DW">
+      DTS:ObjectName="NBA_DW_SQLEXPRESS">
       <DTS:ObjectData>
         <DTS:ConnectionManager
           DTS:ConnectRetryCount="1"
           DTS:ConnectRetryInterval="5"
-          DTS:ConnectionString="Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=NBA_DW;Provider=MSOLEDBSQL.1;Integrated Security=SSPI;Application Name=SSIS-Package-{20B8D6C7-2C4E-47EE-B322-6DB00F17EBAF}(localdb)\MSSQLLocalDB.NBA_DW;Auto Translate=False;" />
+          DTS:ConnectionString="Data Source=DESKTOP-AHL2RE7\SQLEXPRESS;Initial Catalog=NBA_DW;Provider=MSOLEDBSQL.1;Integrated Security=SSPI;Auto Translate=False;Application Name=SSIS-Package-{20B8D6C7-2C4E-47EE-B322-6DB00F17EBAF}(localdb)\MSSQLLocalDB.NBA_DW;" />
       </DTS:ObjectData>
     </DTS:ConnectionManager>
     <DTS:ConnectionManager
@@ -1372,8 +1372,8 @@
               <connections>
                 <connection
                   refId="Package\DFT - DimArena\OLE DB Destination.Connections[OleDbConnection]"
-                  connectionManagerID="Package.ConnectionManagers[(localdb)\MSSQLLocalDB.NBA_DW]"
-                  connectionManagerRefId="Package.ConnectionManagers[(localdb)\MSSQLLocalDB.NBA_DW]"
+                  connectionManagerID="Package.ConnectionManagers[NBA_DW_SQLEXPRESS]"
+                  connectionManagerRefId="Package.ConnectionManagers[NBA_DW_SQLEXPRESS]"
                   description="The OLE DB runtime connection used to access the database."
                   name="OleDbConnection" />
               </connections>
@@ -1699,13 +1699,13 @@
                           containsID="true"
                           dataType="System.String"
                           description="Derived Column Expression"
-                          name="Expression">(DT_WSTR,15)"Month "</property>
+                          name="Expression">(DT_WSTR,15)[TOKEN]("January|February|March|April|May|June|July|August|September|October|November|December","|",[MONTH]((DT_DBDATE)[SUBSTRING](#{Package\DFT - DimDate\Sort.Outputs[Sort Output].Columns[game_date]},1,10)))</property>
                         <property
                           containsID="true"
                           dataType="System.String"
                           description="Derived Column Friendly Expression"
                           expressionType="Notify"
-                          name="FriendlyExpression">(DT_WSTR,15)"Month "</property>
+                          name="FriendlyExpression">(DT_WSTR,15)TOKEN("January|February|March|April|May|June|July|August|September|October|November|December","|",MONTH((DT_DBDATE)SUBSTRING(game_date,1,10)))</property>
                       </properties>
                     </outputColumn>
                     <outputColumn
@@ -1722,13 +1722,13 @@
                           containsID="true"
                           dataType="System.String"
                           description="Derived Column Expression"
-                          name="Expression">(DT_WSTR,15)"Day"</property>
+                          name="Expression">(DT_WSTR,15)[TOKEN]("Sunday|Monday|Tuesday|Wednesday|Thursday|Friday|Saturday","|",[DATEPART]("dw",(DT_DBDATE)[SUBSTRING](#{Package\DFT - DimDate\Sort.Outputs[Sort Output].Columns[game_date]},1,10)))</property>
                         <property
                           containsID="true"
                           dataType="System.String"
                           description="Derived Column Friendly Expression"
                           expressionType="Notify"
-                          name="FriendlyExpression">(DT_WSTR,15)"Day"</property>
+                          name="FriendlyExpression">(DT_WSTR,15)TOKEN("Sunday|Monday|Tuesday|Wednesday|Thursday|Friday|Saturday","|",DATEPART("dw",(DT_DBDATE)SUBSTRING(game_date,1,10)))</property>
                       </properties>
                     </outputColumn>
                   </outputColumns>
@@ -2085,8 +2085,8 @@
               <connections>
                 <connection
                   refId="Package\DFT - DimDate\OLE DB Destination.Connections[OleDbConnection]"
-                  connectionManagerID="Package.ConnectionManagers[(localdb)\MSSQLLocalDB.NBA_DW]"
-                  connectionManagerRefId="Package.ConnectionManagers[(localdb)\MSSQLLocalDB.NBA_DW]"
+                  connectionManagerID="Package.ConnectionManagers[NBA_DW_SQLEXPRESS]"
+                  connectionManagerRefId="Package.ConnectionManagers[NBA_DW_SQLEXPRESS]"
                   description="The OLE DB runtime connection used to access the database."
                   name="OleDbConnection" />
               </connections>
@@ -3250,8 +3250,8 @@
               <connections>
                 <connection
                   refId="Package\DFT - DimPlayer\OLE DB Destination.Connections[OleDbConnection]"
-                  connectionManagerID="Package.ConnectionManagers[(localdb)\MSSQLLocalDB.NBA_DW]"
-                  connectionManagerRefId="Package.ConnectionManagers[(localdb)\MSSQLLocalDB.NBA_DW]"
+                  connectionManagerID="Package.ConnectionManagers[NBA_DW_SQLEXPRESS]"
+                  connectionManagerRefId="Package.ConnectionManagers[NBA_DW_SQLEXPRESS]"
                   description="The OLE DB runtime connection used to access the database."
                   name="OleDbConnection" />
               </connections>
@@ -3976,8 +3976,8 @@
               <connections>
                 <connection
                   refId="Package\DFT - DimSeason\OLE DB Destination.Connections[OleDbConnection]"
-                  connectionManagerID="Package.ConnectionManagers[(localdb)\MSSQLLocalDB.NBA_DW]"
-                  connectionManagerRefId="Package.ConnectionManagers[(localdb)\MSSQLLocalDB.NBA_DW]"
+                  connectionManagerID="Package.ConnectionManagers[NBA_DW_SQLEXPRESS]"
+                  connectionManagerRefId="Package.ConnectionManagers[NBA_DW_SQLEXPRESS]"
                   description="The OLE DB runtime connection used to access the database."
                   name="OleDbConnection" />
               </connections>
@@ -4894,8 +4894,8 @@
               <connections>
                 <connection
                   refId="Package\DFT - DimTeam\OLE DB Destination.Connections[OleDbConnection]"
-                  connectionManagerID="Package.ConnectionManagers[(localdb)\MSSQLLocalDB.NBA_DW]"
-                  connectionManagerRefId="Package.ConnectionManagers[(localdb)\MSSQLLocalDB.NBA_DW]"
+                  connectionManagerID="Package.ConnectionManagers[NBA_DW_SQLEXPRESS]"
+                  connectionManagerRefId="Package.ConnectionManagers[NBA_DW_SQLEXPRESS]"
                   description="The OLE DB runtime connection used to access the database."
                   name="OleDbConnection" />
               </connections>
@@ -7332,8 +7332,8 @@ where [refTable].[team_id] = ?</property>
               <connections>
                 <connection
                   refId="Package\DFT - FactTeamGame\Lookup.Connections[OleDbConnection]"
-                  connectionManagerID="Package.ConnectionManagers[(localdb)\MSSQLLocalDB.NBA_DW]"
-                  connectionManagerRefId="Package.ConnectionManagers[(localdb)\MSSQLLocalDB.NBA_DW]"
+                  connectionManagerID="Package.ConnectionManagers[NBA_DW_SQLEXPRESS]"
+                  connectionManagerRefId="Package.ConnectionManagers[NBA_DW_SQLEXPRESS]"
                   description="Connection manager used to access lookup data."
                   name="OleDbConnection" />
               </connections>
@@ -7517,8 +7517,8 @@ where [refTable].[team_id] = ?</property>
               <connections>
                 <connection
                   refId="Package\DFT - FactTeamGame\OLE DB Destination.Connections[OleDbConnection]"
-                  connectionManagerID="Package.ConnectionManagers[(localdb)\MSSQLLocalDB.NBA_DW]"
-                  connectionManagerRefId="Package.ConnectionManagers[(localdb)\MSSQLLocalDB.NBA_DW]"
+                  connectionManagerID="Package.ConnectionManagers[NBA_DW_SQLEXPRESS]"
+                  connectionManagerRefId="Package.ConnectionManagers[NBA_DW_SQLEXPRESS]"
                   description="The OLE DB runtime connection used to access the database."
                   name="OleDbConnection" />
               </connections>
@@ -9894,8 +9894,8 @@ where [refTable].[team_id] = ?</property>
               <connections>
                 <connection
                   refId="Package\DFT - PlayerGame\OLE DB Destination.Connections[OleDbConnection]"
-                  connectionManagerID="Package.ConnectionManagers[(localdb)\MSSQLLocalDB.NBA_DW]"
-                  connectionManagerRefId="Package.ConnectionManagers[(localdb)\MSSQLLocalDB.NBA_DW]"
+                  connectionManagerID="Package.ConnectionManagers[NBA_DW_SQLEXPRESS]"
+                  connectionManagerRefId="Package.ConnectionManagers[NBA_DW_SQLEXPRESS]"
                   description="The OLE DB runtime connection used to access the database."
                   name="OleDbConnection" />
               </connections>
@@ -10008,16 +10008,32 @@ where [refTable].[team_id] = ?</property>
           SQLTask:SqlStatementSource="-- Tao co so du lieu&#xA;IF NOT EXISTS (SELECT name FROM sys.databases WHERE name = N'NBA_DW')&#xA;BEGIN&#xA;    CREATE DATABASE NBA_DW;&#xA;END&#xA;GO&#xA;&#xA;USE NBA_DW;&#xA;GO&#xA;&#xA;-- Xoa cac bang cu&#xA;IF OBJECT_ID('dbo.player_game', 'U') IS NOT NULL DROP TABLE dbo.player_game;&#xA;IF OBJECT_ID('dbo.bridge_player_game', 'U') IS NOT NULL DROP TABLE dbo.bridge_player_game;&#xA;IF OBJECT_ID('dbo.fact_team_game', 'U') IS NOT NULL DROP TABLE dbo.fact_team_game;&#xA;IF OBJECT_ID('dbo.dim_player', 'U') IS NOT NULL DROP TABLE dbo.dim_player;&#xA;IF OBJECT_ID('dbo.dim_arena', 'U') IS NOT NULL DROP TABLE dbo.dim_arena;&#xA;IF OBJECT_ID('dbo.dim_team', 'U') IS NOT NULL DROP TABLE dbo.dim_team;&#xA;IF OBJECT_ID('dbo.dim_season', 'U') IS NOT NULL DROP TABLE dbo.dim_season;&#xA;IF OBJECT_ID('dbo.dim_date', 'U') IS NOT NULL DROP TABLE dbo.dim_date;&#xA;GO&#xA;&#xA;-- Tao cac bang Dim va Fact&#xA;CREATE TABLE dbo.dim_date (&#xA;    date_key            INT NOT NULL,&#xA;    full_date           DATE NOT NULL,&#xA;    year_number         SMALLINT NOT NULL,&#xA;    quarter_number      TINYINT NOT NULL,&#xA;    month_number        TINYINT NOT NULL,&#xA;    month_name          NVARCHAR(15) NOT NULL,&#xA;    day_of_week_name    NVARCHAR(15) NOT NULL,&#xA;    is_weekend          BIT NOT NULL,&#xA;    CONSTRAINT PK_dim_date PRIMARY KEY CLUSTERED (date_key)&#xA;);&#xA;GO&#xA;&#xA;CREATE TABLE dbo.dim_season (&#xA;    season_id           INT NOT NULL,&#xA;    season_display      NVARCHAR(15) NOT NULL,&#xA;    season_type         NVARCHAR(30) NOT NULL,&#xA;    era_name            NVARCHAR(50) NOT NULL,&#xA;    CONSTRAINT PK_dim_season PRIMARY KEY CLUSTERED (season_id)&#xA;);&#xA;GO&#xA;&#xA;CREATE TABLE dbo.dim_team (&#xA;    team_id             BIGINT NOT NULL,&#xA;    full_name           NVARCHAR(100) NOT NULL,&#xA;    abbreviation        NVARCHAR(10) NOT NULL,&#xA;    city                NVARCHAR(50) NOT NULL,&#xA;    state               NVARCHAR(50) NOT NULL,&#xA;    conference          NVARCHAR(30) NOT NULL,&#xA;    division            NVARCHAR(30) NOT NULL,&#xA;    CONSTRAINT PK_dim_team PRIMARY KEY CLUSTERED (team_id)&#xA;);&#xA;GO&#xA;&#xA;CREATE TABLE dbo.dim_arena (&#xA;    arena_key           INT IDENTITY(1,1) NOT NULL,&#xA;    team_id             BIGINT NULL,&#xA;    arena_name          NVARCHAR(100) NOT NULL,&#xA;    arena_capacity      INT NULL,&#xA;    city                NVARCHAR(50) NULL,&#xA;    owner               NVARCHAR(100) NULL,&#xA;    head_coach          NVARCHAR(100) NULL,&#xA;    CONSTRAINT PK_dim_arena PRIMARY KEY CLUSTERED (arena_key)&#xA;);&#xA;GO&#xA;&#xA;CREATE TABLE dbo.dim_player (&#xA;    player_id           INT NOT NULL,&#xA;    full_name           NVARCHAR(100) NOT NULL,&#xA;    is_active           BIT NOT NULL,&#xA;    position            NVARCHAR(30) NULL,&#xA;    height              NVARCHAR(10) NULL,&#xA;    weight              FLOAT NULL,&#xA;    country             NVARCHAR(50) NULL,&#xA;    birthdate           DATE NULL,&#xA;    draft_round_num     INT NULL,&#xA;    draft_overall_pick  INT NULL,&#xA;    from_year           SMALLINT NULL,&#xA;    to_year             SMALLINT NULL,&#xA;    CONSTRAINT PK_dim_player PRIMARY KEY CLUSTERED (player_id)&#xA;);&#xA;GO&#xA;&#xA;CREATE TABLE dbo.fact_team_game (&#xA;    fact_id             BIGINT IDENTITY(1,1) NOT NULL,&#xA;    game_id             NVARCHAR(30) NOT NULL,&#xA;    date_key            INT NOT NULL,&#xA;    season_id           INT NOT NULL,&#xA;    team_id             BIGINT NOT NULL,&#xA;    opponent_id         BIGINT NOT NULL,&#xA;    arena_key           INT NULL,&#xA;&#xA;    is_home             TINYINT NOT NULL,&#xA;    is_win              TINYINT NOT NULL,&#xA;&#xA;    pts                 FLOAT NOT NULL,&#xA;    pts_opponent        FLOAT NOT NULL,&#xA;    plus_minus          INT NOT NULL,&#xA;&#xA;    fgm                 FLOAT NULL,&#xA;    fga                 FLOAT NULL,&#xA;    fg3m                FLOAT NULL,&#xA;    fg3a                FLOAT NULL,&#xA;&#xA;    reb                 FLOAT NULL,&#xA;    ast                 FLOAT NULL,&#xA;    tov                 FLOAT NULL,&#xA;&#xA;    pts_paint           FLOAT NULL,&#xA;    pts_fast_break      FLOAT NULL,&#xA;&#xA;    game_count          TINYINT DEFAULT 1 NOT NULL,&#xA;&#xA;    CONSTRAINT PK_fact_team_game PRIMARY KEY CLUSTERED (fact_id),&#xA;    CONSTRAINT FK_fact_date FOREIGN KEY (date_key) REFERENCES dbo.dim_date(date_key),&#xA;    CONSTRAINT FK_fact_season FOREIGN KEY (season_id) REFERENCES dbo.dim_season(season_id),&#xA;    CONSTRAINT FK_fact_team FOREIGN KEY (team_id) REFERENCES dbo.dim_team(team_id),&#xA;    CONSTRAINT FK_fact_opponent FOREIGN KEY (opponent_id) REFERENCES dbo.dim_team(team_id),&#xA;    CONSTRAINT FK_fact_arena FOREIGN KEY (arena_key) REFERENCES dbo.dim_arena(arena_key)&#xA;);&#xA;GO&#xA;&#xA;CREATE TABLE dbo.player_game (&#xA;    game_id             NVARCHAR(30) NOT NULL,&#xA;    player_id           INT NOT NULL,&#xA;    team_id             BIGINT NOT NULL,&#xA;    CONSTRAINT PK_player_game PRIMARY KEY CLUSTERED (game_id, player_id),&#xA;    CONSTRAINT FK_player_game_player FOREIGN KEY (player_id) REFERENCES dbo.dim_player(player_id),&#xA;    CONSTRAINT FK_player_game_team FOREIGN KEY (team_id) REFERENCES dbo.dim_team(team_id)&#xA;);&#xA;GO&#xA;&#xA;-- Tao chi muc&#xA;CREATE NONCLUSTERED INDEX IX_fact_date ON dbo.fact_team_game(date_key);&#xA;CREATE NONCLUSTERED INDEX IX_fact_season ON dbo.fact_team_game(season_id);&#xA;CREATE NONCLUSTERED INDEX IX_fact_team ON dbo.fact_team_game(team_id);&#xA;CREATE NONCLUSTERED INDEX IX_fact_opponent ON dbo.fact_team_game(opponent_id);&#xA;CREATE NONCLUSTERED INDEX IX_fact_arena ON dbo.fact_team_game(arena_key);&#xA;CREATE NONCLUSTERED INDEX IX_fact_game_id ON dbo.fact_team_game(game_id);&#xA;&#xA;CREATE NONCLUSTERED INDEX IX_player_game_player ON dbo.player_game(player_id);&#xA;CREATE NONCLUSTERED INDEX IX_player_game_team ON dbo.player_game(team_id);&#xA;GO&#xA;&#xA;PRINT N'TẠO CẤU TRÚC STAR SCHEMA TRONG NBA_DW THÀNH CÔNG!';&#xA;GO&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
       </DTS:ObjectData>
     </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\SQL - Update Team Conference Division"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{ADC0536C-C127-4229-805F-2C0595074C49}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="SQL - Update Team Conference Division"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2025; © 2025 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{20B8D6C7-2C4E-47EE-B322-6DB00F17EBAF}"
+          SQLTask:SqlStatementSource="USE NBA_DW;&#xA;GO&#xA;&#xA;-- ==============================================================================&#xA;-- 1. CẬP NHẬT DIVISION &amp; CONFERENCE CHO 30 FRANCHISE TRONG DIM_TEAM&#xA;-- ==============================================================================&#xA;-- Atlantic&#xA;UPDATE dbo.dim_team SET conference = N'Eastern Conference', division = N'Atlantic'&#xA;WHERE team_id IN (1610612738, 1610612751, 1610612752, 1610612755, 1610612761);&#xA;&#xA;-- Central&#xA;UPDATE dbo.dim_team SET conference = N'Eastern Conference', division = N'Central'&#xA;WHERE team_id IN (1610612741, 1610612739, 1610612765, 1610612754, 1610612749);&#xA;&#xA;-- Southeast&#xA;UPDATE dbo.dim_team SET conference = N'Eastern Conference', division = N'Southeast'&#xA;WHERE team_id IN (1610612737, 1610612766, 1610612748, 1610612753, 1610612764);&#xA;&#xA;-- Northwest&#xA;UPDATE dbo.dim_team SET conference = N'Western Conference', division = N'Northwest'&#xA;WHERE team_id IN (1610612743, 1610612750, 1610612760, 1610612757, 1610612762);&#xA;&#xA;-- Pacific&#xA;UPDATE dbo.dim_team SET conference = N'Western Conference', division = N'Pacific'&#xA;WHERE team_id IN (1610612744, 1610612746, 1610612747, 1610612756, 1610612758);&#xA;&#xA;-- Southwest&#xA;UPDATE dbo.dim_team SET conference = N'Western Conference', division = N'Southwest'&#xA;WHERE team_id IN (1610612742, 1610612745, 1610612763, 1610612740, 1610612759);&#xA;GO&#xA;&#xA;-- ==============================================================================&#xA;-- 2. CẬP NHẬT TÊN HIỂN THỊ MÙA GIẢI ĐỊNH DẠNG 'YYYY-YY' TRONG DIM_SEASON&#xA;-- ==============================================================================&#xA;UPDATE dbo.dim_season &#xA;SET season_display = SUBSTRING(CAST(season_id AS VARCHAR(10)), 2, 4) + '-' + &#xA;                     RIGHT(CAST(CAST(SUBSTRING(CAST(season_id AS VARCHAR(10)), 2, 4) AS INT) + 1 AS VARCHAR(10)), 2)&#xA;WHERE LEN(CAST(season_id AS VARCHAR(10))) = 5;&#xA;GO&#xA;&#xA;PRINT N'CẬP NHẬT CONFERENCE, DIVISION VÀ SEASON_DISPLAY THÀNH CÔNG!';&#xA;GO" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
   </DTS:Executables>
   <DTS:PrecedenceConstraints>
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint]"
       DTS:CreationName=""
-      DTS:DTSID="{094ABCD8-8FF7-483A-9A6E-E7D3D72ECCC3}"
+      DTS:DTSID="{9253E87C-7B94-4284-8AA5-91B7A9239AA1}"
       DTS:From="Package\DFT - DimTeam"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint"
-      DTS:To="Package\DFT - DimArena" />
+      DTS:To="Package\SQL - Update Team Conference Division" />
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
       DTS:CreationName=""
@@ -10066,6 +10082,14 @@ where [refTable].[team_id] = ?</property>
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint 6"
       DTS:To="Package\DFT - FactTeamGame" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 7]"
+      DTS:CreationName=""
+      DTS:DTSID="{64303048-BAC4-43FA-A39C-148F3C93EC32}"
+      DTS:From="Package\SQL - Update Team Conference Division"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 7"
+      DTS:To="Package\DFT - DimArena" />
   </DTS:PrecedenceConstraints>
   <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
 <!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
@@ -10078,23 +10102,23 @@ where [refTable].[team_id] = ?</property>
     design-time-name="Package">
     <LayoutInfo>
       <GraphLayout
-        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="157.6,42.4"
+          Size="154.4,41.6"
           Id="Package\DFT - DimArena"
-          TopLeft="356.562484060415,164.666664858659" />
+          TopLeft="579.521668208506,170.675068214737" />
         <NodeLayout
-          Size="150.4,42.4"
+          Size="150.4,41.6"
           Id="Package\DFT - DimDate"
-          TopLeft="563.437474812381,328.421049025581" />
+          TopLeft="589.457883031037,423.31684726208" />
         <NodeLayout
           Size="158.4,42.4"
           Id="Package\DFT - DimPlayer"
-          TopLeft="565.937474700623,250.192979709071" />
+          TopLeft="584.815025761217,331.579534259581" />
         <NodeLayout
           Size="165.6,42.4"
           Id="Package\DFT - DimSeason"
-          TopLeft="556.562475119718,163.982454339856" />
+          TopLeft="577.480842511187,247.007664351115" />
         <NodeLayout
           Size="156,42.4"
           Id="Package\DFT - DimTeam"
@@ -10102,51 +10126,29 @@ where [refTable].[team_id] = ?</property>
         <NodeLayout
           Size="186.4,42.4"
           Id="Package\DFT - FactTeamGame"
-          TopLeft="137.187493867241,330.92982092786" />
+          TopLeft="145.350759190741,424.333182190526" />
         <NodeLayout
           Size="169.6,42.4"
           Id="Package\DFT - PlayerGame"
-          TopLeft="352.604150904033,328.078943766179" />
+          TopLeft="360.767416227533,421.482305028845" />
         <NodeLayout
           Size="234.4,41.6"
           Id="Package\SQL - Delete, Recreate All Tables"
           TopLeft="117.812494733371,67.6228062750584" />
         <EdgeLayout
-          Id="Package.PrecedenceConstraints[Constraint]"
-          TopLeft="316.312492833473,186.342103451394">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="40.2499912269424,0"
-              Start="0,0"
-              End="32.7499912269424,0">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="32.7499912269424,0" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 1]"
-          TopLeft="642.249974910171,206.649121006523">
+          TopLeft="662.147934136202,289.407664351115">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,43.5438587025483"
+              EndConnector="0,42.1718699084664"
               Start="0,0"
-              End="0,36.0438587025483">
+              End="0,34.6718699084664">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,36.0438587025483" />
+                    End="0,34.6718699084664" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -10157,18 +10159,18 @@ where [refTable].[team_id] = ?</property>
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 2]"
-          TopLeft="513.895817393748,185.657892932591">
+          TopLeft="658.501255359846,212.275068214737">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="42.6666577259697,0"
+              EndConnector="0,34.7325961363779"
               Start="0,0"
-              End="35.1666577259697,0">
+              End="0,27.2325961363779">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="35.1666577259697,0" />
+                    End="0,27.2325961363779" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -10201,18 +10203,18 @@ where [refTable].[team_id] = ?</property>
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 4]"
-          TopLeft="642.020808089836,292.859646375737">
+          TopLeft="664.336454396127,373.979534259581">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,35.5614026498437"
+              EndConnector="0,49.3373130024984"
               Start="0,0"
-              End="0,28.0614026498437">
+              End="0,41.8373130024984">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,28.0614026498437" />
+                    End="0,41.8373130024984" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -10223,18 +10225,18 @@ where [refTable].[team_id] = ?</property>
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 5]"
-          TopLeft="563.437474812381,349.583329729213">
+          TopLeft="589.457883031037,443.399576145462">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-41.499990575015,0"
+              EndConnector="-59.090466803504,0"
               Start="0,0"
-              End="-33.999990575015,0">
+              End="-51.590466803504,0">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="-33.999990575015,0" />
+                    End="-51.590466803504,0" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -10245,7 +10247,7 @@ where [refTable].[team_id] = ?</property>
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 6]"
-          TopLeft="352.604150904033,350.837715680353">
+          TopLeft="360.767416227533,444.241076943019">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -10257,6 +10259,54 @@ where [refTable].[team_id] = ?</property>
                   Capacity="5">
                   <mssgle:LineSegment
                     End="-21.2499903701254,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="173.6,51.2"
+          Id="Package\SQL - Update Team Conference Division"
+          TopLeft="365.816327309339,164.411764561769" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="316.312492833473,188.281319969616">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="49.503834475866,0"
+              Start="0,0"
+              End="42.003834475866,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="42.003834475866,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 7]"
+          TopLeft="539.416327309339,190.743416388253">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="40.1053408991669,0"
+              Start="0,0"
+              End="32.6053408991669,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="32.6053408991669,0" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
