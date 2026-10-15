@@ -41,5 +41,35 @@
         </Partition>
       </Partitions>
     </MeasureGroup>
+    <MeasureGroup>
+      <ID>Unique Games</ID>
+      <Partitions>
+        <Partition>
+          <ID>Unique Games</ID>
+          <Name>Unique Games</Name>
+          <Source xsi:type="DsvTableBinding">
+            <DataSourceViewID>NBA DW</DataSourceViewID>
+            <TableID>dbo_fact_team_game</TableID>
+          </Source>
+          <StorageMode>Molap</StorageMode>
+          <ProcessingMode>Regular</ProcessingMode>
+        </Partition>
+      </Partitions>
+    </MeasureGroup>
+    <MeasureGroup>
+      <ID>Player Distinct Count</ID>
+      <Partitions>
+        <Partition>
+          <ID>Player Distinct Count</ID>
+          <Name>Player Distinct Count</Name>
+          <Source xsi:type="DsvTableBinding">
+            <DataSourceViewID>NBA DW</DataSourceViewID>
+            <TableID>dbo_player_game</TableID>
+          </Source>
+          <StorageMode>Molap</StorageMode>
+          <ProcessingMode>Regular</ProcessingMode>
+        </Partition>
+      </Partitions>
+    </MeasureGroup>
   </MeasureGroups>
 </Cube>

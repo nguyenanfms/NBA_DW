@@ -86,6 +86,18 @@
           <AttributeID>Arena Key</AttributeID>
           <Name>Arena Key</Name>
         </AttributeRelationship>
+        <AttributeRelationship>
+          <AttributeID>Game Id</AttributeID>
+          <Name>Game Id</Name>
+        </AttributeRelationship>
+        <AttributeRelationship>
+          <AttributeID>Is Home</AttributeID>
+          <Name>Is Home</Name>
+        </AttributeRelationship>
+        <AttributeRelationship>
+          <AttributeID>Is Win</AttributeID>
+          <Name>Is Win</Name>
+        </AttributeRelationship>
       </AttributeRelationships>
       <OrderBy>Key</OrderBy>
       <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
@@ -175,6 +187,49 @@
       <AttributeHierarchyVisible>false</AttributeHierarchyVisible>
       <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
       <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute>
+      <ID>Game Id</ID>
+      <Name>Game Id</Name>
+      <KeyColumns>
+        <KeyColumn>
+          <DataType>WChar</DataType>
+          <DataSize>30</DataSize>
+          <Source xsi:type="ColumnBinding">
+            <TableID>dbo_fact_team_game</TableID>
+            <ColumnID>game_id</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <OrderBy>Key</OrderBy>
+    </Attribute>
+    <Attribute>
+      <ID>Is Home</ID>
+      <Name>Is Home</Name>
+      <KeyColumns>
+        <KeyColumn>
+          <DataType>UnsignedTinyInt</DataType>
+          <Source xsi:type="ColumnBinding">
+            <TableID>dbo_fact_team_game</TableID>
+            <ColumnID>is_home</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <OrderBy>Key</OrderBy>
+    </Attribute>
+    <Attribute>
+      <ID>Is Win</ID>
+      <Name>Is Win</Name>
+      <KeyColumns>
+        <KeyColumn>
+          <DataType>UnsignedTinyInt</DataType>
+          <Source xsi:type="ColumnBinding">
+            <TableID>dbo_fact_team_game</TableID>
+            <ColumnID>is_win</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <OrderBy>Key</OrderBy>
     </Attribute>
   </Attributes>
   <ddl300:ProcessingState>Unprocessed</ddl300:ProcessingState>

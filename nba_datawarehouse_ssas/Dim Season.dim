@@ -78,6 +78,14 @@
           <AttributeID>Era Name</AttributeID>
           <Name>Era Name</Name>
         </AttributeRelationship>
+        <AttributeRelationship>
+          <AttributeID>Season Label</AttributeID>
+          <Name>Season Label</Name>
+        </AttributeRelationship>
+        <AttributeRelationship>
+          <AttributeID>Era Label</AttributeID>
+          <Name>Era Label</Name>
+        </AttributeRelationship>
       </AttributeRelationships>
       <OrderBy>Key</OrderBy>
       <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
@@ -133,6 +141,36 @@
       <OrderBy>Key</OrderBy>
       <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
       <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute>
+      <ID>Season Label</ID>
+      <Name>Season Label</Name>
+      <KeyColumns>
+        <KeyColumn>
+          <DataType>WChar</DataType>
+          <DataSize>15</DataSize>
+          <Source xsi:type="ColumnBinding">
+            <TableID>dbo_dim_season</TableID>
+            <ColumnID>season_label</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <OrderBy>Key</OrderBy>
+    </Attribute>
+    <Attribute>
+      <ID>Era Label</ID>
+      <Name>Era Label</Name>
+      <KeyColumns>
+        <KeyColumn>
+          <DataType>WChar</DataType>
+          <DataSize>50</DataSize>
+          <Source xsi:type="ColumnBinding">
+            <TableID>dbo_dim_season</TableID>
+            <ColumnID>era_label</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <OrderBy>Key</OrderBy>
     </Attribute>
   </Attributes>
   <ddl300:ProcessingState>Unprocessed</ddl300:ProcessingState>

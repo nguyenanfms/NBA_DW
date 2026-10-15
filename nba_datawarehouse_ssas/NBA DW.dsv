@@ -264,7 +264,7 @@
                   <shape groupshapeid="0" groupnode="0" />
                 </ddscontrol>
               </dds>
-</DiagramLayout>
+            </DiagramLayout>
             <ShowRelationshipNames>False</ShowRelationshipNames>
             <UseDiagramDefaultLayout>True</UseDiagramDefaultLayout>
             <DiagramViewPortLeft>-2084</DiagramViewPortLeft>
@@ -279,7 +279,7 @@
   </Annotations>
   <DataSourceID>NBA DW</DataSourceID>
   <Schema>
-    <xs:schema id="NBA_x0020_DW" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop">
+    <xs:schema xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" id="NBA_x0020_DW">
       <xs:element name="NBA_x0020_DW" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:design-time-name="8bc6e2c1-936d-4031-88f0-42e69b465bc7">
         <xs:complexType>
           <xs:choice minOccurs="0" maxOccurs="unbounded">
@@ -314,6 +314,12 @@
                   <xs:element name="pts_paint" msprop:FriendlyName="pts_paint" msprop:DbColumnName="pts_paint" msprop:design-time-name="b4b91071-991b-4570-b893-455b6f37c9e3" type="xs:double" minOccurs="0" />
                   <xs:element name="pts_fast_break" msprop:FriendlyName="pts_fast_break" msprop:DbColumnName="pts_fast_break" msprop:design-time-name="0c01d492-f293-434e-94d2-454145393fde" type="xs:double" minOccurs="0" />
                   <xs:element name="game_count" msprop:FriendlyName="game_count" msprop:DbColumnName="game_count" msprop:design-time-name="37e8ec72-9d79-47c0-96a9-bd0fc4a58491" type="xs:unsignedByte" />
+                  <xs:element name="ast_valid" msprop:FriendlyName="ast_valid" msprop:DbColumnName="ast_valid" type="xs:int" msdata:ReadOnly="true" msprop:ComputedColumnExpression="CASE WHEN ast IS NULL THEN 0 ELSE 1 END" msprop:IsLogical="True" />
+                  <xs:element name="tov_valid" msprop:FriendlyName="tov_valid" msprop:DbColumnName="tov_valid" type="xs:int" msdata:ReadOnly="true" msprop:ComputedColumnExpression="CASE WHEN tov IS NULL THEN 0 ELSE 1 END" msprop:IsLogical="True" />
+                  <xs:element name="fg3m_valid" msprop:FriendlyName="fg3m_valid" msprop:DbColumnName="fg3m_valid" type="xs:int" msdata:ReadOnly="true" msprop:ComputedColumnExpression="CASE WHEN fg3m IS NULL THEN 0 ELSE 1 END" msprop:IsLogical="True" />
+                  <xs:element name="fg3a_valid" msprop:FriendlyName="fg3a_valid" msprop:DbColumnName="fg3a_valid" type="xs:int" msdata:ReadOnly="true" msprop:ComputedColumnExpression="CASE WHEN fg3a IS NULL THEN 0 ELSE 1 END" msprop:IsLogical="True" />
+                  <xs:element name="paint_valid" msprop:FriendlyName="paint_valid" msprop:DbColumnName="paint_valid" type="xs:int" msdata:ReadOnly="true" msprop:ComputedColumnExpression="CASE WHEN pts_paint IS NULL THEN 0 ELSE 1 END" msprop:IsLogical="True" />
+                  <xs:element name="fast_break_valid" msprop:FriendlyName="fast_break_valid" msprop:DbColumnName="fast_break_valid" type="xs:int" msdata:ReadOnly="true" msprop:ComputedColumnExpression="CASE WHEN pts_fast_break IS NULL THEN 0 ELSE 1 END" msprop:IsLogical="True" />
                 </xs:sequence>
               </xs:complexType>
             </xs:element>
@@ -391,6 +397,20 @@
                       </xs:restriction>
                     </xs:simpleType>
                   </xs:element>
+                  <xs:element name="season_label" msprop:FriendlyName="season_label" msprop:DbColumnName="season_label" msdata:ReadOnly="true" msprop:ComputedColumnExpression="CAST(season_id % 10000 AS varchar(4)) + '-' + RIGHT('0' + CAST((season_id % 10000 + 1) % 100 AS varchar(2)), 2)" msprop:IsLogical="True">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="15" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="era_label" msprop:FriendlyName="era_label" msprop:DbColumnName="era_label" msdata:ReadOnly="true" msprop:ComputedColumnExpression="CASE WHEN season_id % 10000 &gt;= 2014 THEN '3-Point Revolution Era' WHEN season_id % 10000 &gt;= 1999 THEN 'Pace Space Era' WHEN season_id % 10000 &gt;= 1980 THEN 'Jordan Era' ELSE 'Early Pioneer Era' END" msprop:IsLogical="True">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="50" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
                 </xs:sequence>
               </xs:complexType>
             </xs:element>
@@ -457,7 +477,7 @@
                 </xs:sequence>
               </xs:complexType>
             </xs:element>
-            <xs:element name="dbo_player_game" msprop:design-time-name="ceb49f04-dbee-480f-84d2-2ffebe225267" msprop:FriendlyName="player_game" msprop:TableType="Table" msprop:DbSchemaName="dbo" msprop:DbTableName="player_game">
+            <xs:element name="dbo_player_game" msprop:design-time-name="ceb49f04-dbee-480f-84d2-2ffebe225267" msprop:FriendlyName="player_game" msprop:TableType="View" msprop:DbSchemaName="dbo" msprop:DbTableName="player_game" msprop:IsLogical="True" msprop:QueryBuilder="GenericQueryBuilder" msprop:QueryDefinition="SELECT pg.game_id, pg.player_id, pg.team_id, f.fact_id FROM dbo.player_game AS pg INNER JOIN dbo.fact_team_game AS f ON f.game_id = pg.game_id AND f.team_id = pg.team_id">
               <xs:complexType>
                 <xs:sequence>
                   <xs:element name="game_id" msprop:FriendlyName="game_id" msprop:DbColumnName="game_id" msprop:design-time-name="eccd89d0-da29-49d0-b9ab-abf023ed3a9b">
@@ -469,6 +489,7 @@
                   </xs:element>
                   <xs:element name="player_id" msprop:FriendlyName="player_id" msprop:DbColumnName="player_id" msprop:design-time-name="c324971f-170f-4d36-b660-a5770bde27d2" type="xs:int" />
                   <xs:element name="team_id" msprop:FriendlyName="team_id" msprop:DbColumnName="team_id" msprop:design-time-name="a9d1766a-0eee-4ab5-9cb0-dde52f7209e3" type="xs:long" />
+                  <xs:element name="fact_id" msprop:FriendlyName="fact_id" msprop:DbColumnName="fact_id" type="xs:long" />
                 </xs:sequence>
               </xs:complexType>
             </xs:element>
@@ -572,6 +593,10 @@
         <xs:keyref name="FK_fact_season" refer="dbo_dim_season_Constraint1">
           <xs:selector xpath=".//dbo_fact_team_game" />
           <xs:field xpath="season_id" />
+        </xs:keyref>
+        <xs:keyref name="FK_player_game_fact" refer="Constraint1">
+          <xs:selector xpath=".//dbo_player_game" />
+          <xs:field xpath="fact_id" />
         </xs:keyref>
       </xs:element>
     </xs:schema>

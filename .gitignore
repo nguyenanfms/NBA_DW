@@ -40,6 +40,7 @@ bài tập quá trình/
 
 # Local document previews and working files
 tmp/
+backups/
 
 # Superseded screenshots and local rename history
 image/ssis/_archive/
